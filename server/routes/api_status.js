@@ -62,6 +62,20 @@ router.patch('/:id', (req, res, next) => {
     })
 })
 
+router.delete('/:id', (req, res, next) => {
+  const id = Number.parseInt(req.params.id);
+
+  knex('status')
+    .del('*')
+    .where('id', id)
+    .then((rows) => {
+      let status = rows[0];
+
+      delete status.id;
+      res.send(status);
+    });
+});
+
 router.get('/:id', (req, res, next) => {
   const id = Number.parseInt(req.params.id);
 
@@ -72,6 +86,26 @@ router.get('/:id', (req, res, next) => {
       res.send(row);
     })
 });
+
+router.post('/:id/likes', (req, res, next) => {
+  knex('status')
+    .update('likes', knex.raw('likes + 1'))
+    .where({id: req.params.id})
+    .then( () => knex('status').where({id: req.params.id}).first())
+    .then((status) => {
+      res.json({likes: status.likes})
+    })
+})
+
+router.delete('/:id/likes', (req, res, next) => {
+  knex('status')
+    .update('likes', knex.raw('likes - 1'))
+    .where({id: req.params.id})
+    .then(() => knex('status').where({id: req.params.id}).first())
+    .then((status) => {
+      res.json({likes: status.likes})
+    })
+})
 
 router.get('/', (req, res) => {
   res.send('Hi from STATUS API')
