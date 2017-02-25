@@ -5,12 +5,13 @@ exports.up = function(knex) {
     table.increments();
     table.integer('user_id')
           .notNullable()
+          .defaultTo(0)
           .references('id')
           .inTable('users')
           .index();
-    table.text('status_update');
+    table.text('status_update').notNullable().defaultTo('');
     table.integer('likes').notNullable().defaultTo(0);
-    table.text('link');
+    table.text('link').notNullable().defaultTo('');
     table.timestamps(true, true);
   });
 };

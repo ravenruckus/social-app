@@ -50,4 +50,7 @@ exports.seed = function(knex) {
       }
     ])
     })
-}
+    .then(function() {
+      return knex.raw("SELECT setval('status_id_seq', (SELECT MAX(id) FROM status));");
+    });
+};
