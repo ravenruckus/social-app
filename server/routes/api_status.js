@@ -20,6 +20,7 @@ router.get('/', (_req, res) => {
 router.post('/', (req, res, next) => {
 
   const { userId, statusUpdate, link } = req.body;
+
   const insertStatus = {userId};
 
   if(statusUpdate) {
@@ -166,9 +167,17 @@ router.get('/:statusId/comments', (req, res, next) => {
 
 
 router.post('/:statusId/comments', (req, res, next) => {
+  const statusId = Number.parseInt(req.params.statusId)
 
-  const {statusComment, userId } = req.body;
-  const statusId = req.params.statusId
+  if (Number.isNaN(statusId)) {
+    return next()
+  }
+
+  const {statusComment, userId } = req.body
+
+  if(!statusComment || !statusComment.trim()) {
+    return next(boom.create(400, 'Comment must not be blank'))
+  }
 
   const insertComment = { statusComment, userId, statusId}
 
