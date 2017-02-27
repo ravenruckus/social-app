@@ -5,12 +5,14 @@ const boom = require('boom');
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const knex = require('../db');
+const emailSend = require('emailjs/email');
+
 
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
 // route to create invitation to users
-router.post('/admin/newusers', (req, res, next) => {
+router.post('/newusers', (req, res, next) => {
   const {
     email, first_name, last_name, is_admin
   } = req.body;
@@ -21,8 +23,6 @@ router.post('/admin/newusers', (req, res, next) => {
   if (!email || !email.trim()) {
     return next(boom.create(400, 'Email must not be blank'));
   }
-  const emailJSON = JSON.stringify(email);
-  const reg_url = Buffer.from(emailJSON, 'utf8').toString('base64');
 
   knex('users')
     .where('email', email)
@@ -31,7 +31,8 @@ router.post('/admin/newusers', (req, res, next) => {
       if (user) {
         throw boom.create(400, 'Email already exists');
       }
-      return bcrypt.hash(reg_url, 8)
+      const emailJSON = JSON.stringify(email);
+      return Buffer.from(emailJSON, 'utf8').toString('base64');
     })
     .then((reg_url) => {
       return knex('users').insert({
@@ -44,23 +45,50 @@ router.post('/admin/newusers', (req, res, next) => {
       }, '*');
     })
     .then((users) => {
-      const user = users[0];
+      console.log('email' + process.env.E_S_L + ' password ' + process.env.E_S_P);
+      for (const user of users) {
+        //creating request for sending invitation
+        const emailServer = emailSend.server.connect({
+           user: `${process.env.E_S_L}`,
+           password: `${process.env.E_S_P}`,
+           host:	"smtp-mail.outlook.com",
+           tls: {ciphers: "SSLv3"}
+        });
 
-      res.send(user);
+        const message	= {
+           text:	`You are invited to new social network for Galvanize students Here is link for continue registration: https://localhost:3000/newuser/${user.reg_url}`,
+           from:	`Social-App Invitation <${process.env.E_S_L}>`,
+           to:		`${user.first_name} ${user.last_name} <${user.email}>`,
+           subject:	"Invitation to Galvanize students social network",
+           attachment:
+           [
+              {data: `<html>i <i>hope</i> this works! here is an image: <img src='cid:my-image' width='100' height ='50'>
+              <div> Here is link for continue registration: <a>https://localhost:3000/newuser/${user.reg_url}</a></div></html>`}
+           ]
+        };
+
+        // send the message and get a callback with an error or details of the message that was sent
+        emailServer.send(message, (err, message) => {
+          if(err) {
+            throw boom.create(400, `Invitation email was not sent ${JSON.stringify(err)}`);
+          }
+         return res.send(message);
+       })
+      }
     })
     .catch((err) => {
       next(err);
     });
 });
 
-router.get('/admin/users', (req, res, next) => {
+router.get('/users', (req, res, next) => {
   knex('users')
     .orderBy('email')
-    .then((users) => {;
+    .then((users) => {
       res.send(users);
     })
     .catch((err) => {
-      // console.error(err);
+      console.error('Here is error from route admin' + err);
       next(err);
     });
 });

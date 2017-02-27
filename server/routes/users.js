@@ -12,17 +12,20 @@ const router = express.Router();
 // route for invitation link
 router.get('/newuser/:url', (req, res, next) => {
   const reg_url = req.params.url
-  knex('users').where('reg_url', `${reg_url}`)
   console.log(reg_url);
-  .then((data) => {
-    if (!data) {
-      throw boom.create(400, 'Bad link, User is already registred');
-    }
-    res.send(data);
-  })
-  .catch((err) => {
-    next(err);
-  });
+  knex('users')
+    .where('reg_url', `${reg_url}`)
+    .then((data) => {
+      const user = data[0];
+
+      if (user.is_registred) {
+        throw boom.create(400, 'Bad link, User is already registred');
+      }
+      res.send(user);
+    })
+    .catch((err) => {
+      next(err);
+    });
 })
 
 router.post('/newuser', (req, res, next) => {

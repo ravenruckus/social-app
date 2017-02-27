@@ -1,3 +1,9 @@
+'use strict';
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
@@ -10,6 +16,8 @@ app.use(bodyParser.json());
 app.use('/api', require('./routes/api'))
 app.use('/api/projects', require('./routes/api_projects'))
 app.use('/api/status', require('./routes/api_status'))
+app.use('/admin', require('./routes/admin'))
+app.use('/users', require('./routes/users'))
 
 app.use((_req, res) => {
   res.sendStatus(400)
