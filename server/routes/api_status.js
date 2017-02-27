@@ -1,14 +1,16 @@
 const router = require('express').Router()
 const knex = require('../db')
 const boom = require('boom')
+const { camelizeKeys, decamelizeKeys } = require('humps')
 
 
 router.get('/', (_req, res) => {
   knex('status')
     .orderBy('updated_at', 'desc')
     .then((rows) => {
-       console.log(rows)
-      res.send(rows);
+       const statuses = camelizeKeys(rows)
+
+      res.send(statuses);
     })
     .catch((err) => {
       next(err)
@@ -17,11 +19,11 @@ router.get('/', (_req, res) => {
 
 router.post('/', (req, res, next) => {
 
-  const { user_id, status_update, link } = req.body;
-  const insertStatus = {user_id};
+  const { userId, statusUpdate, link } = req.body;
+  const insertStatus = {userId};
 
-  if(status_update) {
-    insertStatus.status_update = status_update;
+  if(statusUpdate) {
+    insertStatus.statusUpdate = statusUpdate;
   }
 
   if(link) {
@@ -29,9 +31,9 @@ router.post('/', (req, res, next) => {
   }
 
   knex('status')
-    .insert(insertStatus, '*')
+    .insert(decamelizeKeys(insertStatus), '*')
     .then((rows) => {
-      const status= rows[0];
+      const status= camelizeKeys(rows[0]);
       res.send(status);
     })
     .catch((err) => {
@@ -55,22 +57,22 @@ router.patch('/:id', (req, res, next) => {
       }
 
 
-      const { status_update, link } = req.body;
+      const { statusUpdate, link } = req.body;
       const updateStatus = {};
 
-      if(status_update) {
-        updateStatus.status_update = status_update;
+      if(statusUpdate) {
+        updateStatus.statusUpdate = statusUpdate;
       }
 
       if(link) {
         updateStatus.link = link;
       }
       return knex('status')
-        .update(updateStatus, '*')
+        .update(decamelizeKeys(updateStatus), '*')
         .where('id', id);
     })
     .then((rows) => {
-      const status = rows[0];
+      const status = camelizeKeys(rows[0]);
 
       res.send(status);
     })
@@ -90,7 +92,7 @@ router.delete('/:id', (req, res, next) => {
     .del('*')
     .where('id', id)
     .then((rows) => {
-      let status = rows[0];
+      let status = camelizeKeys(rows[0]);
 
       if (!status) {
         return next()
@@ -100,7 +102,7 @@ router.delete('/:id', (req, res, next) => {
     })
     .catch((err) => {
       console.log(err)
-      next(err)
+      next(err)``
     })
 });
 
@@ -114,7 +116,8 @@ router.get('/:id', (req, res, next) => {
       if (!row) {
         throw boom.create(404, 'Not Found')
       }
-      res.send(row);
+      const status = camelizeKeys(row)
+      res.send(status);
     })
     .catch((err) => {
       next(err)
