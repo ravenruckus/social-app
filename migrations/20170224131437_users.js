@@ -10,6 +10,8 @@ exports.up = function(knex) {
     table.integer('Gclass').notNullable().defaultTo(0);
     table.string('grad_date').notNullable().defaultTo('');
     table.boolean('is_admin').notNullable().defaultTo(false);
+    table.string('reg_url').notNullable().defaultTo('');
+    table.boolean('is_registred').notNullable().defaultTo(false);
     table.timestamps(true, true);
   });
 };
