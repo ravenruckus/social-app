@@ -146,9 +146,99 @@ router.delete('/:id/likes', (req, res, next) => {
     .catch(err => next(err))
 })
 
-// router.get('/:status_id/comments')
-//   knex('status_comments')
-//     .insert({status_id: status_id, user_id: user_id, status: status })
+router.get('/:statusId/comments', (req, res, next) => {
+  const statusId = Number.parseInt(req.params.statusId)
+
+  if (Number.isNaN(statusId)) {
+    return next()
+  }
+
+  knex('status_comments')
+    .where('status_id', statusId)
+    .then((rows) => {
+      if(!rows) {
+        throw boom.create(404, 'Not Found')
+      }
+      const comments = camelizeKeys(rows)
+      res.send(comments)
+    })
+})
+
+
+router.post('/:statusId/comments', (req, res, next) => {
+
+  const {statusComment, userId } = req.body;
+  const statusId = req.params.statusId
+
+  const insertComment = { statusComment, userId, statusId}
+
+  knex('status_comments')
+    .insert(decamelizeKeys(insertComment), '*')
+    .then((rows) => {
+      const statusComment = camelizeKeys(rows[0])
+      res.send(statusComment)
+    })
+    .catch(err => next(err))
+})
+
+router.delete('/:statusId/comments/:id', (req, res, next) => {
+  const commentId = Number.parseInt(req.params.id)
+
+  if (Number.isNaN(commentId)) {
+    return next()
+  }
+
+    knex('status_comments')
+      .del('*')
+      .where('id', commentId)
+      .then((rows) => {
+        const comment = rows[0]
+
+        if (!comment) {
+          return next()
+        }
+
+        delete comment.id
+        res.send(camelizeKeys(comment))
+      })
+      .catch((err) => {
+        console.log(err)
+        next(err)
+      })
+})
+
+router.patch('/:statusId/comments/:id', (req, res, next) => {
+  const commentId = Number.parseInt(req.params.id)
+
+  if (Number.isNaN(commentId)) {
+    return next()
+  }
+
+  knex('status_comments')
+    .where('id', commentId)
+    .first()
+    .then((comment) => {
+      if (!comment) {
+        throw boom.create(404, 'Not Found')
+      }
+
+      const statusComment = req.body
+      const updateComment = statusComment
+
+      return knex('status_comments')
+        .update(decamelizeKeys(updateComment), '*')
+        .where('id', commentId)
+    })
+    .then((rows) => {
+      const comment = camelizeKeys(rows[0])
+
+      res.send(comment)
+    })
+    .catch((err) => {
+      next(err)
+    })
+})
+
 
 router.get('/', (req, res) => {
   res.send('Hi from STATUS API')

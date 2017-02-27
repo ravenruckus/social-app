@@ -4,14 +4,14 @@ const knex = require('../db')
 router.get('/users', (req, res) => {
   knex('users')
     .then((response) => {
-      
+
       res.send(response);
 
     })
 
 })
 
-router.get('/', (req, res) => {
+router.get('/test', (req, res) => {
   res.send('Hi from API')
 })
 
