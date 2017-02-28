@@ -43,6 +43,8 @@ export default class Timeline extends Component {
           </Col>
          <Col md={6}>
           {this.state.list.map(ele => (
+
+          
             <div>
             <div style={{background: '#333', color: '#fff', padding: '3%', borderRadius: '4px' }} >
               <h3>{ele.title}</h3>
