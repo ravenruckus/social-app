@@ -21,8 +21,9 @@ app.use(express.static(path.resolve(__dirname, '..', 'build')));
 app.use('/api', require('./routes/api'))
 app.use('/api/projects', require('./routes/api_projects'))
 app.use('/api/status', require('./routes/api_status'))
-app.use('/admin', require('./routes/admin'))
-app.use('/users', require('./routes/users'))
+app.use('/api/admin', require('./routes/admin'))
+app.use('/api/users', require('./routes/users'))
+app.use('/api/tokens', require('./routes/tokens'))
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));

@@ -45,7 +45,6 @@ router.post('/newusers', (req, res, next) => {
       }, '*');
     })
     .then((users) => {
-      console.log('email' + process.env.E_S_L + ' password ' + process.env.E_S_P);
       for (const user of users) {
         //creating request for sending invitation
         const emailServer = emailSend.server.connect({
