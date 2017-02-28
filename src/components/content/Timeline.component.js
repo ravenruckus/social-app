@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Col, Row } from 'react-bootstrap'
 
 
 
@@ -10,7 +9,6 @@ export default class Timeline extends Component {
 
       this.state = {
         list: [],
-        backgroundColor: '#333'
       }
     }
 
@@ -24,17 +22,12 @@ export default class Timeline extends Component {
         this.setState({
           list:data
         })
-        console.log(this.state.list)
-
 
       })
 
     }
-
-    styleModules({element}) {
-      if(element.description) {
-        this.setState({backgroundColor: '#blue'})
-      }
+    getComments(userId) {
+      
     }
 
 
@@ -46,39 +39,31 @@ export default class Timeline extends Component {
         return (
           <div style={{background: '#333', color: '#fff', padding: '3%', borderRadius: '4px' }} >
             <h3>{ele.title}</h3>
+            <p>Project By {ele.userId}</p>
             <p>{ele.description}</p>
+            <p>{ele.likes}</p>
           </div>
         )
       }
       else {
         return (
           <div style={{background: 'blue', color: '#fff', padding: '3%', borderRadius: '4px' }}>
+            <p>User: {ele.userId}</p>
             <p>{ele.statusUpdate}</p>
+            <p>Likes: {ele.likes}</p>
           </div>
         )
       }
     })
 
-    let bc = 'red'
 
     return(
       <div>
         <p>Hello from the timeline</p>
-          <Row>
-          <Col md={3}>
-            <h3>Left sidebar</h3>
-
-          </Col>
-         <Col md={6}>
 
            {styleModules}
-           
-       </Col>
-       <Col md={3}>
-         <h3>Right Sidebar</h3>
 
-       </Col>
-       </Row>
+
 
       </div>
     )
