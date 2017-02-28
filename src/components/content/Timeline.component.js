@@ -9,7 +9,8 @@ export default class Timeline extends Component {
       super(props)
 
       this.state = {
-        list: []
+        list: [],
+        backgroundColor: '#333'
       }
     }
 
@@ -30,9 +31,36 @@ export default class Timeline extends Component {
 
     }
 
+    styleModules({element}) {
+      if(element.description) {
+        this.setState({backgroundColor: '#blue'})
+      }
+    }
+
 
 
   render(){
+
+    const styleModules = this.state.list.map(ele => {
+       if (ele.description) {
+        return (
+          <div style={{background: '#333', color: '#fff', padding: '3%', borderRadius: '4px' }} >
+            <h3>{ele.title}</h3>
+            <p>{ele.description}</p>
+          </div>
+        )
+      }
+      else {
+        return (
+          <div style={{background: 'blue', color: '#fff', padding: '3%', borderRadius: '4px' }}>
+            <p>{ele.statusUpdate}</p>
+          </div>
+        )
+      }
+    })
+
+    let bc = 'red'
+
     return(
       <div>
         <p>Hello from the timeline</p>
@@ -42,19 +70,9 @@ export default class Timeline extends Component {
 
           </Col>
          <Col md={6}>
-          {this.state.list.map(ele => (
 
-          
-            <div>
-            <div style={{background: '#333', color: '#fff', padding: '3%', borderRadius: '4px' }} >
-              <h3>{ele.title}</h3>
-              <p>{ele.description}</p>
-            </div>
-            <div style={{background: 'blue', color: '#fff', padding: '3%', borderRadius: '4px' }}>
-              <p>{ele.statusUpdate}</p>
-            </div>
-          </div>
-          ))}
+           {styleModules}
+           
        </Col>
        <Col md={3}>
          <h3>Right Sidebar</h3>

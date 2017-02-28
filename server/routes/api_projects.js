@@ -73,7 +73,7 @@ router.patch('/:id', (req, res, next) => {
 
 
       const { title, description, imgUrl, webUrl, githubLink } = req.body;
-      const updateProject = {};
+      const updateProject = {updatedAt: new Date()};
 
       if(title) {
         updateProject.title = title;

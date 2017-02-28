@@ -59,7 +59,7 @@ router.patch('/:id', (req, res, next) => {
 
 
       const { statusUpdate, link } = req.body;
-      const updateStatus = {};
+      const updateStatus = {updatedAt: new Date()};
 
       if(statusUpdate) {
         updateStatus.statusUpdate = statusUpdate;

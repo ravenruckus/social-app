@@ -12,8 +12,6 @@ exports.seed = function(knex) {
         web_url: 'https://www.seattle.gov/animal-shelter/adopt/applications',
         github_link: 'https://github.com/',
         likes: 3,
-        created_at: new Date('2017-02-24 14:43:04 UTC'),
-        updated_at: new Date('2017-02-24 14:43:04 UTC')
       },
       {
         id: 2,
@@ -24,8 +22,6 @@ exports.seed = function(knex) {
         web_url: 'https://www.seattle.gov/animal-shelter/adopt/applications',
         github_link: 'https://github.com/',
         likes: 1,
-        created_at: new Date('2017-02-24 14:43:04 UTC'),
-        updated_at: new Date('2017-02-24 14:43:04 UTC')
       }
     ])
     })
