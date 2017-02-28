@@ -10,7 +10,8 @@ class App extends Component {
 
       this.state = {
         isLoggedIn: false,
-        userId: 0
+        userId: 0,
+        userName: ''
       }
       this.editParentState = this.editParentState.bind(this)
     }
@@ -19,27 +20,27 @@ class App extends Component {
       this.setState(newState)
     }
 
-    // componentWillMount(){
-    //   axios.get('/api/tokens/token')
-    //     .then(res => {
-    //       if (!res.data) {
-    //         return browserHistory.push('/login')
-    //       }
-    //       console.log(res.data);
-    //       // this.setState(res)
-    //     })
-    //     .catch(err => {
-    //       console.error(err);
-    //     })
-    // }
+    componentWillMount(){
+      axios.get('/api/tokens/token')
+        .then(res => {
+          if (!res.data) {
+            return browserHistory.push('/login')
+          }
+          this.setState(res.data)
+        })
+        .catch(err => {
+          console.error('Error text: ' + err.responseText + '  Error status: ' + err.status);
+        })
+    }
 
     render() {
-      const { isLogIn } = this.state
+      const { isLoggedIn, userId, userName } = this.state
+      console.log('isLoggedIn' + isLoggedIn + '; userId: ' + userId + '; userName: ' + userName);
       return (
         <main>
           <Grid>
             { this.props.children
-              ? React.cloneElement(this.props.children, {isLogIn, editParentState: this.editParentState})
+              ? React.cloneElement(this.props.children, {isLoggedIn, userId, userName, editParentState: this.editParentState})
               : null
             }
           </Grid>

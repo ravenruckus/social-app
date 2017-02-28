@@ -44,9 +44,11 @@ router.post('/token', (req, res, next) => {
         secure: router.get('env') === 'production'
       });
 
-      delete user.hashedPassword;
+      delete user.hashedPassword
+      delete user.regUrl
+      delete user.isRegistred
 
-      res.send(user);
+      res.send(user)
     })
     .catch(bcrypt.MISMATCH_ERROR, () => {
       throw boom.create(400, 'Bad email or password');
@@ -61,13 +63,12 @@ router.get('/token', (req, res) => {
     if (err) {
       return res.send(false);
     }
-
     res.send({
       userId: payload.userId,
       isLogIn: true
-    });
-  });
-});
+    })
+  })
+})
 
 router.delete('/token', (req, res) => {
   res.clearCookie('token');
