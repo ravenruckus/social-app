@@ -65,7 +65,7 @@ router.get('/token', (req, res) => {
     }
     res.send({
       userId: payload.userId,
-      isLogIn: true
+      isLoggedIn: true
     })
   })
 })

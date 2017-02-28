@@ -24,7 +24,7 @@ class App extends Component {
       axios.get('/api/tokens/token')
         .then(res => {
           if (!res.data) {
-            return browserHistory.push('/login')
+            // return browserHistory.push('/login')
           }
           this.setState(res.data)
         })
@@ -35,7 +35,6 @@ class App extends Component {
 
     render() {
       const { isLoggedIn, userId, userName } = this.state
-      console.log('isLoggedIn' + isLoggedIn + '; userId: ' + userId + '; userName: ' + userName);
       return (
         <main>
           <Grid>

@@ -55,7 +55,7 @@ router.post('/newusers', (req, res, next) => {
         });
 
         const message	= {
-           text:	`You are invited to new social network for Galvanize students Here is link for continue registration: https://localhost:3000/newuser/${user.reg_url}`,
+           text:	`You are invited to new social network for Galvanize students Here is link for continue registration: http://localhost:3000/newuser/${user.reg_url}`,
            from:	`Social-App Invitation <${process.env.E_S_L}>`,
            to:		`${user.first_name} ${user.last_name} <${user.email}>`,
            subject:	"Invitation to Galvanize students social network",
@@ -69,7 +69,7 @@ router.post('/newusers', (req, res, next) => {
         // send the message and get a callback with an error or details of the message that was sent
         emailServer.send(message, (err, message) => {
           if(err) {
-            throw boom.create(400, `Invitation email was not sent ${JSON.stringify(err)}`);
+            throw boom.create(400, `Invitation email was not sent ${err}`);
           }
          return res.send(message);
        })

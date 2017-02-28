@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, FormGroup, Col, ControlLabel, Button} from 'react-bootstrap'
+import { Form, FormGroup, FormControl, ControlLabel, Button} from 'react-bootstrap'
 import axios from 'axios'
 
 export default class AdminCreateUsers extends Component {
@@ -17,12 +17,19 @@ export default class AdminCreateUsers extends Component {
   handleChanges(event){
     this.setState({[event.target.name]: event.target.value})
   }
-  handleSendInvitation(){
+  handleSendInvitation(event){
+    event.preventDefault()
     const { first_name, last_name, email, is_admin } = this.state
     const request = { first_name, last_name, email, is_admin }
     axios.post('/api/admin/newusers', request)
       .then((res) => {
         console.log(res);
+        this.setState({
+          first_name: '',
+          last_name: '',
+          email: '',
+          is_admin: false
+        })
       })
       .catch((err) => {
         console.log('Error text: ' + err.responseText + '  Error status: ' + err.status);
@@ -30,7 +37,7 @@ export default class AdminCreateUsers extends Component {
   }
   render(){
     return(
-      <div>
+      <div style={{margin: '10% 0'}}>
         <Form inline>
           <FormGroup controlId="formInlineName">
             <ControlLabel>First Name</ControlLabel>
@@ -40,6 +47,18 @@ export default class AdminCreateUsers extends Component {
               type="text"
               placeholder="Jane"
               value={this.state.first_name}
+              onChange={this.handleChanges}
+            />
+          </FormGroup>
+          {' '}
+          <FormGroup controlId="formInlineName">
+            <ControlLabel>Last Name</ControlLabel>
+            {' '}
+            <FormControl
+              name="last_name"
+              type="text"
+              placeholder="Smith"
+              value={this.state.last_name}
               onChange={this.handleChanges}
             />
           </FormGroup>

@@ -35,7 +35,8 @@ export default class RegUser extends Component {
         })
       })
       .catch((err) => {
-        return console.error(err)
+        console.error(err)
+        return browserHistory.push('/')
       })
   }
   handleState(event){
@@ -57,6 +58,7 @@ export default class RegUser extends Component {
     axios.patch('/api/users/newuser', request)
       .then((data) => {
         console.log(data)
+        browserHistory.push('/')
       })
       .catch((err) => {
         console.log('Error text: ' + err.responseText + '  Error status: ' + err.status);
@@ -130,7 +132,7 @@ export default class RegUser extends Component {
             </Col>
           </FormGroup>
           <FormGroup controlId="formHorizontalEmail">
-            <Col componentClass={ControlLabel} sm={5}>
+            <Col componentClass={ControlLabel} sm={6}>
               Graduation Date and Class:
             </Col>
             <Col sm={4}>
@@ -151,12 +153,13 @@ export default class RegUser extends Component {
               />
             </Col>
           </FormGroup>
+          <br />
           <FormGroup>
             <Col smOffset={2} sm={10}>
               <Button
                 type="submit"
                 onClick={this.handleSubmit}>
-                Log In
+                Submit changes
               </Button>
               <Button
                 style={{margin: '0 5%'}}
