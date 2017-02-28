@@ -43,6 +43,12 @@ router.post('/token', (req, res, next) => {
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7), // 7 days
         secure: router.get('env') === 'production'
       });
+      const userName = [user.firstName, user.lastName].join(' ')
+      res.cookie('userName', userName, {
+        httpOnly: true,
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7), // 7 days
+        secure: router.get('env') === 'production'
+      });
 
       delete user.hashedPassword
       delete user.regUrl
@@ -64,6 +70,7 @@ router.get('/token', (req, res) => {
       return res.send(false);
     }
     res.send({
+      userName: req.cookies.userName,
       userId: payload.userId,
       isLoggedIn: true
     })
@@ -71,7 +78,8 @@ router.get('/token', (req, res) => {
 })
 
 router.delete('/token', (req, res) => {
-  res.clearCookie('token');
+  res.clearCookie('token')
+  res.clearCookie('user')
   res.end();
 });
 

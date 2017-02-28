@@ -25,7 +25,6 @@ export default class Login extends Component {
     }
     axios.post('/api/tokens/token', request)
       .then((row) => {
-        console.log(row)
         const user = {
           isLoggedIn: true,
           userId: row.data.id,
