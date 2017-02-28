@@ -1,0 +1,13 @@
+.navbar {
+  background-color: #757778;
+}
+.navbar-default
+.navbar-nav>li>a {
+    color: #f0f0f0;
+}
+.navbar-default .navbar-brand {
+    color: #f0f0f0;
+}
+.navbar-default .navbar-text {
+    color: #f0f0f0;
+}
