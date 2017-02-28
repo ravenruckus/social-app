@@ -9,10 +9,9 @@ const knex = require('../db');
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
-// route for invitation link
+// route from invitation link
 router.get('/newuser/:url', (req, res, next) => {
   const reg_url = req.params.url
-  console.log(reg_url);
   knex('users')
     .where('reg_url', `${reg_url}`)
     .then((data) => {
@@ -28,9 +27,10 @@ router.get('/newuser/:url', (req, res, next) => {
     });
 })
 
-router.post('/newuser', (req, res, next) => {
+//route for updating(creating) user from user side
+router.patch('/newuser', (req, res, next) => {
   const {
-    email, password
+    id, email, password, Gclass, first_name, last_name, grad_date, is_registred
   } = req.body;
 
   if (!email || !email.trim()) {
@@ -41,28 +41,27 @@ router.post('/newuser', (req, res, next) => {
     return next(boom.create(400, 'Password must be at least 8 characters'));
   }
 
+  // const Gclass = parseInt(req.body.Gclass, 10);
   knex('users')
     .where('email', email)
     .first()
     .then((user) => {
-      if (user) {
-        throw boom.create(400, 'Email already exists');
-      }
-
       return bcrypt.hash(req.body.password, 12)
     })
-
-  .then((hashed_password) => {
-      return knex('users').insert({
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        email: req.body.email,
-        hashed_password: hashed_password,
-        Gclass: req.body.Gclass,
-        grad_date: req.body.grad_date,
-        is_registred: true
-      }, '*');
-    })
+    .then((hashed_password) => {
+        return knex('users')
+          .where('id', id )
+          .update({
+            first_name, last_name, email, hashed_password, Gclass, grad_date, is_registred
+          // first_name: req.body.first_name,
+          // last_name: req.body.last_name,
+          // email: req.body.email,
+          // hashed_password: hashed_password,
+          // Gclass: Gclass,
+          // grad_date: req.body.grad_date,
+          // is_registred: req.body.is_registred
+        }, '*');
+      })
     .then((users) => {
       const user = users[0];
 
@@ -79,7 +78,9 @@ router.post('/newuser', (req, res, next) => {
         secure: router.get('env') === 'production' // forces the token only be sent as https
       });
 
-      delete user.hashed_password;
+      delete user.hashed_password
+      delete user.reg_url
+      delete user.is_registred
 
       res.send(user);
     })
