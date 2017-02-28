@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Grid, Col, Row } from 'react-bootstrap'
+import { Col, Row } from 'react-bootstrap'
 
 
 
@@ -36,7 +36,6 @@ export default class Timeline extends Component {
     return(
       <div>
         <p>Hello from the timeline</p>
-        <Grid>
           <Row>
           <Col md={3}>
             <h3>Left sidebar</h3>
@@ -45,11 +44,11 @@ export default class Timeline extends Component {
          <Col md={6}>
           {this.state.list.map(ele => (
             <div>
-            <div>
+            <div style={{background: '#333', color: '#fff', padding: '3%', borderRadius: '4px' }} >
               <h3>{ele.title}</h3>
               <p>{ele.description}</p>
             </div>
-            <div style={{background: '#333', color: '#fff', padding: '3%', borderRadius: '4px' }}>
+            <div style={{background: 'blue', color: '#fff', padding: '3%', borderRadius: '4px' }}>
               <p>{ele.statusUpdate}</p>
             </div>
           </div>
@@ -60,7 +59,6 @@ export default class Timeline extends Component {
 
        </Col>
        </Row>
-      </Grid>
 
       </div>
     )
