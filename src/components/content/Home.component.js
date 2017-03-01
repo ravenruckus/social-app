@@ -14,7 +14,7 @@ export default class Home extends Component {
        </Col>
 
        <Col md={6}>
-         <Timeline />
+         <Timeline userId={this.props.userId} />
        </Col>
 
        <Col md={3}>

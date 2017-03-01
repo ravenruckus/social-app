@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import ProjectTimeline from './Project_timeline.component'
+import StatusTimeline from './Status_timeline.component'
 
 
 
@@ -10,6 +12,7 @@ export default class Timeline extends Component {
       this.state = {
         list: [],
       }
+
     }
 
     componentDidMount() {
@@ -26,32 +29,46 @@ export default class Timeline extends Component {
       })
 
     }
-    getComments(userId) {
-      
-    }
+    // getComments(userId) {
+    //
+    //   axios.get(`api/status_comments/:${statusId}`)
+    //     .then(({comments}) => {
+    //
+    //     })
+    //
+    //
+    // }
 
-
+//make a module for status, make a module for project
+//have a parent component that passes data into components with this.props
 
   render(){
+    const { userId } = this.props;
+
+    // const { status } = this.props;
 
     const styleModules = this.state.list.map(ele => {
        if (ele.description) {
         return (
-          <div style={{background: '#333', color: '#fff', padding: '3%', borderRadius: '4px' }} >
-            <h3>{ele.title}</h3>
-            <p>Project By {ele.userId}</p>
-            <p>{ele.description}</p>
-            <p>{ele.likes}</p>
-          </div>
+          <ProjectTimeline project={ele}/>
+
+          // <div style={{background: '#333', color: '#fff', padding: '3%', borderRadius: '4px' }} >
+          //   <h3>{ele.title}</h3>
+          //   <p>Project By {ele.userId}</p>
+          //   <p>{ele.description}</p>
+          //   <p>{ele.likes}</p>
+          // </div>
         )
       }
       else {
         return (
-          <div style={{background: 'blue', color: '#fff', padding: '3%', borderRadius: '4px' }}>
-            <p>User: {ele.userId}</p>
-            <p>{ele.statusUpdate}</p>
-            <p>Likes: {ele.likes}</p>
-          </div>
+          <div>
+          <h1> logged in: {userId}</h1>
+
+          <StatusTimeline status={ele}/>
+        </div>
+
+
         )
       }
     })
@@ -60,6 +77,7 @@ export default class Timeline extends Component {
     return(
       <div>
         <p>Hello from the timeline</p>
+
 
            {styleModules}
 
