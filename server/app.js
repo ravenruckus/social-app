@@ -30,16 +30,17 @@ app.get('*', (req, res) => {
 })
 
 app.use((_req, res) => {
-  res.sendStatus(400)
+  res.sendStatus(404)
 })
 
 // eslint-disable-next-line max-params
 app.use((err, _req, res, _next) => {
+  console.log(err.output.payload.message);
   if (err.output && err.output.statusCode) {
     return res
       .status(err.output.statusCode)
       .set('Content-Type', 'text/plain')
-      .send(err.message)
+      .send(err.output.payload.message)
   }
 
   //eslint-disable-next-line no-console

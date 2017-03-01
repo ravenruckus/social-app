@@ -23,7 +23,7 @@ class App extends Component {
 
     componentDidMount(){
       axios.get('/api/tokens/token')
-        .then(res => {
+        .then((res) => {
           if (!res.data) {
             return console.log(res);
             // return browserHistory.push('/')

@@ -19,7 +19,7 @@ router.get('/', (_req, res) => {
 
 router.post('/', (req, res, next) => {
 
-  const { userId, title, description, imgUrl, webUrl, githubLink } = req.body;
+  const { userId, title, description, imgUrl, webUrl, githubLink, githubReadme } = req.body;
 
   if(!title || !title.trim()) {
     return next(boom.create(400, 'Title must not be blank'))
@@ -29,7 +29,7 @@ router.post('/', (req, res, next) => {
     return next(boom.create(400, 'Image must not be blank'))
   }
 
-  if(!description || !description.trim()) {
+  if(!githubReadme || !githubReadme.trim()) {
     return next(boom.create(400, 'Description must not be blank'))
   }
 
@@ -37,13 +37,11 @@ router.post('/', (req, res, next) => {
     return next(boom.create(400, 'Github link must not be blank'))
   }
 
-  const insertProject = {userId, title, description, imgUrl, githubLink}
+  const insertProject = {userId, title, description, imgUrl, githubLink, githubReadme}
 
   if(webUrl) {
     insertProject.webUrl = webUrl
-
   }
-
 
   knex('projects')
     .insert(decamelizeKeys(insertProject), '*')
@@ -110,7 +108,7 @@ router.patch('/:id', (req, res, next) => {
 })
 
 router.delete('/:id', (req, res, next) => {
-  const id = Number.parseInt(req.params.id);
+  const id = Number.parseInt(req.params.id)
 
   if (Number.isNaN(id)) {
     return next()
@@ -130,7 +128,7 @@ router.delete('/:id', (req, res, next) => {
     })
     .catch((err) => {
       console.log(err)
-      next(err)``
+      next(err)
     })
 });
 

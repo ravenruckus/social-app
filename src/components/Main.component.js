@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './bgr.css'
 
 export default class Main extends Component {
   constructor(props) {
@@ -6,9 +7,17 @@ export default class Main extends Component {
   }
   render(){
     return(
-      <div style={{textAlign: 'center', margin: 'auto'}}>
-        <h3>Hello <strong>{this.props.userName}</strong> from main component(it is temporary component for testing)</h3>
-        <h3>If you see this page component authorization is works well</h3>
+      <div className="homepage-hero-module">
+        <div className="video-container">
+            <div className="filter"></div>
+            <video autoPlay loop className="fillWidth">
+                <source src="./bground/bgr.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+                <source src="./bground/bgr.webm" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+            </video>
+            <div className="poster hidden">
+                <img src="./bground/bgr.jpg" alt="" />
+            </div>
+        </div>
       </div>
     )
   }

@@ -8,8 +8,7 @@ export default class NavBar extends Component {
   constructor(props) {
     super(props)
     this.handleSignOut = this.handleSignOut.bind(this)
-    this.handleLogIn = this.handleLogIn.bind(this)
-    this.handleAdmin = this.handleAdmin.bind(this)
+    this.handleNavLinks = this.handleNavLinks.bind(this)
   }
   handleSignOut(event){
     event.preventDefault()
@@ -23,11 +22,8 @@ export default class NavBar extends Component {
         console.error(err);
       })
   }
-  handleLogIn(){
-    browserHistory.push('/login')
-  }
-  handleAdmin(){
-    browserHistory.push('/admin/newusers')
+  handleNavLinks(link){
+    browserHistory.push(link)
   }
   render(){
     return(
@@ -39,25 +35,25 @@ export default class NavBar extends Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          {/* <Nav>
-            <NavItem eventKey={1} href="#">Link</NavItem>
+          <Nav>
+            <NavItem onClick={() => this.handleNavLinks('/projects')}>Projects</NavItem>
             <NavItem eventKey={2} href="#">Link</NavItem>
-            <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
+            {/* <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
               <MenuItem eventKey={3.1}>Action</MenuItem>
               <MenuItem eventKey={3.2}>Another action</MenuItem>
               <MenuItem eventKey={3.3}>Something else here</MenuItem>
               <MenuItem divider />
               <MenuItem eventKey={3.3}>Separated link</MenuItem>
-            </NavDropdown>
-          </Nav> */}
+            </NavDropdown> */}
+          </Nav>
           {this.props.isLoggedIn
             ? <Nav pullRight>
                 <Navbar.Text>Singned as: <strong>{this.props.userName}</strong></Navbar.Text>
-                <NavItem onClick={this.handleAdmin} href="admin"><strong>ADMIN PANEL</strong></NavItem>
+                <NavItem onClick={() => this.handleNavLinks('/admin/newusers')} href="admin"><strong>ADMIN PANEL</strong></NavItem>
                 <NavItem onClick={this.handleSignOut} href="login"><strong>LOG OUT</strong></NavItem>
               </Nav>
             : <Nav pullRight>
-                <NavItem onClick={this.handleLogIn} href="/login"><strong>LOG IN</strong></NavItem>
+                <NavItem onClick={() => this.handleNavLinks('/login')} href="/login"><strong>LOG IN</strong></NavItem>
               </Nav>
             }
         </Navbar.Collapse>

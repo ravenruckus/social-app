@@ -146,7 +146,7 @@ export default class RegUser extends Component {
             <Col sm={2}>
               <FormControl
                 name="Gclass"
-                type="number"
+                type="text"
                 placeholder="40"
                 value={this.state.Gclass}
                 onChange={this.handleState}

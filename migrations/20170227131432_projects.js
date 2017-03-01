@@ -15,6 +15,7 @@ exports.up = function(knex) {
     table.string('img_url').notNullable().defaultTo('');
     table.string('web_url').notNullable().defaultTo('');
     table.string('github_link').notNullable().defaultTo('');
+    table.string('github_readme').notNullable().defaultTo('');
     table.integer('likes').notNullable().defaultTo(0);
     table.timestamps(true, true);
   });

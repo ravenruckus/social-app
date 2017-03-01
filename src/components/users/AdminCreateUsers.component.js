@@ -21,23 +21,29 @@ export default class AdminCreateUsers extends Component {
     event.preventDefault()
     const { first_name, last_name, email, is_admin } = this.state
     const request = { first_name, last_name, email, is_admin }
-    axios.post('/api/admin/newusers', request)
+    axios.post('/api/admin/newusers', request, { validateStatus: (status) => status < 500})
       .then((res) => {
-        console.log(res);
-        this.setState({
-          first_name: '',
-          last_name: '',
-          email: '',
-          is_admin: false
-        })
+        if (res.status > 400) {
+          console.log(res);
+          this.setState({
+            first_name: '',
+            last_name: '',
+            email: '',
+            is_admin: false
+          })
+          alert('User ' + res.config.data + ' Succesfully created in database and invitation was send to email')
+        }
+        alert("Message from server: "  + res.data)
       })
       .catch((err) => {
-        console.log('Error text: ' + err.responseText + '  Error status: ' + err.status);
+        console.log(err);
       })
   }
   render(){
     return(
-      <div style={{margin: '10% 0'}}>
+      <div style={{margin: '10% 3%'}}>
+        <hr />
+        <h2 style={{margin: '5% 20%'}}>Creating users and send them invitation</h2>
         <Form inline>
           <FormGroup controlId="formInlineName">
             <ControlLabel>First Name</ControlLabel>
@@ -93,6 +99,7 @@ export default class AdminCreateUsers extends Component {
             Send invitation
           </Button>
         </Form>
+        <hr />
       </div>
     )
   }

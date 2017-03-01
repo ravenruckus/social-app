@@ -23,15 +23,21 @@ export default class Login extends Component {
       email: this.state.email,
       password: this.state.password
     }
-    axios.post('/api/tokens/token', request)
+    axios.post('/api/tokens/token', request, { validateStatus: (status) => status < 500})
       .then((row) => {
-        const user = {
-          isLoggedIn: true,
-          userId: row.data.id,
-          userName: `${row.data.firstName} ${row.data.lastName}`
+        if (row.status < 400) {
+          const user = {
+            isLoggedIn: true,
+            userId: row.data.id,
+            userName: `${row.data.firstName} ${row.data.lastName}`
+          }
+          this.props.editParentState(user)
+          browserHistory.push('/')
         }
-        this.props.editParentState(user)
-        browserHistory.push('/')
+        else {
+          alert("Message from server: "  + row.data)
+          this.setState({ email: '', password: ''})
+        }
       })
       .catch((err) => {
         console.log('Error text: ' + err.responseText + '  Error status: ' + err.status);
