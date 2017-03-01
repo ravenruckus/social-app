@@ -33,6 +33,7 @@ export default class Timeline extends Component {
 
   render(){
     const { userId } = this.props;
+    const currentUser = userId;
 
     const styleModules = this.state.list.map(ele => {
        if (ele.description) {
@@ -45,9 +46,10 @@ export default class Timeline extends Component {
       else {
         return (
           <div>
-            <h1> logged in: {userId}</h1>
+            <h1> logged in: {currentUser}</h1>
 
-            <StatusTimeline status={ele}/>
+
+            <StatusTimeline status={ele} currentUser={currentUser}/>
 
           </div>
 
