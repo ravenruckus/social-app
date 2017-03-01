@@ -29,45 +29,27 @@ export default class Timeline extends Component {
       })
 
     }
-    // getComments(userId) {
-    //
-    //   axios.get(`api/status_comments/:${statusId}`)
-    //     .then(({comments}) => {
-    //
-    //     })
-    //
-    //
-    // }
 
-//make a module for status, make a module for project
-//have a parent component that passes data into components with this.props
 
   render(){
     const { userId } = this.props;
 
-    // const { status } = this.props;
-
     const styleModules = this.state.list.map(ele => {
        if (ele.description) {
         return (
+
           <ProjectTimeline project={ele}/>
 
-          // <div style={{background: '#333', color: '#fff', padding: '3%', borderRadius: '4px' }} >
-          //   <h3>{ele.title}</h3>
-          //   <p>Project By {ele.userId}</p>
-          //   <p>{ele.description}</p>
-          //   <p>{ele.likes}</p>
-          // </div>
         )
       }
       else {
         return (
           <div>
-          <h1> logged in: {userId}</h1>
+            <h1> logged in: {userId}</h1>
 
-          <StatusTimeline status={ele}/>
-        </div>
+            <StatusTimeline status={ele}/>
 
+          </div>
 
         )
       }

@@ -10,6 +10,9 @@ export default class StatusTimeline extends Component {
 
     this.state = {
       list: [],
+      status: this.props.status,
+      statusId: this.props.status.id
+
     }
     this.getComments = this.getComments.bind(this);
 
@@ -26,17 +29,19 @@ export default class StatusTimeline extends Component {
       })
   }
 
+  componentDidMount() {
+    this.getComments(this.state.statusId)
+  }
+
   render() {
-    const { status } = this.props;
-    this.getComments(status.id)
 
     return (
       <div>
         <h2>Hello from status timeline</h2>
         <div style={{background: 'blue', color: '#fff', padding: '3%', borderRadius: '4px' }}>
-          <p>User: {status.userId}</p>
-          <p>{status.statusUpdate}</p>
-          <p>Likes: {status.likes}</p>
+          <p>User: {this.state.status.userId}</p>
+          <p>{this.state.status.statusUpdate}</p>
+          <p>Likes: {this.state.status.likes}</p>
 
           { this.state.list.map(ele => (
             <p>comment: {ele.statusComment}</p>
