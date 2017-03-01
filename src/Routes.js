@@ -5,14 +5,9 @@ import Login from './components/users/Login.component'
 import Main from './components/Main.component'
 import RegUser from './components/users/RegUser.component'
 import AdminCreateUsers from './components/users/AdminCreateUsers.component'
-<<<<<<< HEAD
 import Home from './components/content/Home.component'
-
-
-
-=======
 import Projects from './components/projects/Projects.component'
->>>>>>> create project components
+
 
 
 export default class Routes extends Component {
