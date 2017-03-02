@@ -14,7 +14,7 @@ export default class ProjectComments extends Component {
     this.handleCreateComment = this.handleCreateComment.bind(this)
     this.handleLikeButton = this.handleLikeButton.bind(this)
   }
-  componentWillMount(){
+  componentDidMount(){
     axios.get(`/api/projects/${this.props.projectId}/comments`)
       .then((res) => {
         this.setState({comments: res.data})
@@ -45,13 +45,14 @@ export default class ProjectComments extends Component {
       })
       .catch(err => console.error(err))
   }
-  handleLikeButton(event, element){
+  handleLikeButton(event, element, index){
     event.preventDefault()
     let likes = element.likes + 1
-    axios.post(`/api/projects/${element.id}/likes`, {likes})
+    axios.post(`/api/projects/comment/${element.id}/likes`, {likes})
       .then((res) => {
-        console.log(res.data.likes)
-        this.setState({commentLikes: likes})
+        const comments = [...this.state.comments]
+        comments[index].likes = res.data[0].likes
+        this.setState({comments})
       })
   }
   render(){
@@ -77,7 +78,7 @@ export default class ProjectComments extends Component {
         </div>
         {this.state.comments.length
             ? <div className="col-sm-8">
-                {this.state.comments.map(el => (
+                {this.state.comments.map((el, i) => (
                 <div className="panel panel-white post panel-shadow" key={el.id}>
                   <div className="post-heading">
                     <div className="pull-left image">
@@ -102,7 +103,7 @@ export default class ProjectComments extends Component {
                         name="commentLikes"
                         href="#"
                         className="btn btn-default stat-item"
-                        onClick={() => this.handleLikeButton(event, el)}
+                        onClick={() => this.handleLikeButton(event, el, i)}
                         >
                         <i className="fa fa-thumbs-up icon"></i>{el.likes}
                       </a>

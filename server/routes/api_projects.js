@@ -145,8 +145,8 @@ router.delete('/:id', (req, res, next) => {
       res.send(project);
     })
     .catch((err) => {
-      console.log(err)
-      next(err)
+      console.error(err)
+      next(boom.create(400, 'comes from error'))
     })
 });
 
@@ -168,28 +168,34 @@ router.get('/:id', (req, res, next) => {
     })
 });
 
-router.post('/:id/likes', (req, res, next) => {
-  console.log(req.body.likes + '    ' + req.params.id);
+router.post('/project/:id/likes', (req, res, next) => {
   knex('projects')
     .update('likes', req.body.likes)
     .where('id', req.params.id)
+    .returning('*')
     .then( (data) => {
-      res.sendStatus(status)
+      res.send(data)
     })
-    .catch(err => next(err))
+    .catch(err => {
+      console.error(err);
+      next(boom.create(400, 'comes from API error router.post likes'))
+    })
 })
 
 // <============ routes for comments ================>
 
-router.post('/:commentId/likes', (req, res, next) => {
-  console.log(req.body.likes + '    ' + req.params.commentId);
+router.post('/comment/:commentId/likes', (req, res, next) => {
   knex('projects_comments')
     .update('likes', req.body.likes)
     .where('id', req.params.commentId)
+    .returning('*')
     .then( (row) => {
-      res.send(row.data)
+      res.send(row)
     })
-    .catch(err => next(err))
+    .catch( err => {
+    console.error(err);
+    next(boom.create(400, 'comes from API error router.post likes'))
+  })
 })
 
 router.get('/:projectsId/comments', (req, res, next) => {
@@ -228,8 +234,11 @@ router.post('/:projectsId/comments', (req, res, next) => {
       const projectComment = camelizeKeys(rows[0])
       res.send(projectComment)
     })
-    .catch(err => next(err))
-})
+    .catch((err) => {
+      console.error(err);
+      next(boom.create(400, 'posting comment problem from API'))
+    }
+  )})
 
 router.delete('/:projectsId/comments/:id', (req, res, next) => {
   const commentId = Number.parseInt(req.params.id)
@@ -252,7 +261,7 @@ router.delete('/:projectsId/comments/:id', (req, res, next) => {
         res.send(camelizeKeys(comment))
       })
       .catch((err) => {
-        console.log(err)
+        console.error(err)
         next(err)
       })
 })

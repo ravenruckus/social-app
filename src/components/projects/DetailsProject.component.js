@@ -28,8 +28,8 @@ export default class DetailsProject extends Component {
     let likes = like + 1
     this.setState({projectLikes: likes, isDisabledButton: true})
     const element = this.props.detailedProject[0]
-    axios.post(`/api/projects/${element.id}/likes`, {likes})
-      .then(res => console.log(res.data.likes))
+    axios.post(`/api/projects/project/${element.id}/likes`, {likes})
+      .then(res => console.log(res.data[0].likes))
   }
   handleStateDetails(newState){
     this.setState(newState)
