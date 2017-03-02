@@ -36,7 +36,6 @@ class App extends Component {
     }
     render() {
       const { isLoggedIn, userId, userName } = this.state
-      console.log(this.state);
       return (
         <main>
           <NavBar isLoggedIn={this.state.isLoggedIn} userName={this.state.userName} />

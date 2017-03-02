@@ -289,9 +289,4 @@ router.patch('/:statusId/comments/:id', (req, res, next) => {
     })
 })
 
-
-router.get('/', (req, res) => {
-  res.send('Hi from STATUS API')
-})
-
 module.exports = router
