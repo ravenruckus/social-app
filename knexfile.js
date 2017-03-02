@@ -6,6 +6,8 @@ module.exports = {
       database: process.env.DATABASE_URL || 'social',
     }
   },
-
-
+  production: {
+    client: 'pg',
+      connection: process.env.DATABASE_URL
+    }
 }
