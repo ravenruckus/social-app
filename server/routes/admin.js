@@ -55,15 +55,10 @@ router.post('/newusers', (req, res, next) => {
         });
 
         const message	= {
-           text:	`You are invited to new social network for Galvanize students Here is link for continue registration: http://localhost:3000/newuser/${user.reg_url}`,
+           text:	`You are invited to new social network for Galvanize students Here is link for continue registration: https://students-network.herokuapp.com/newuser/${user.reg_url}`,
            from:	`Social-App Invitation <${process.env.E_S_L}>`,
            to:		`${user.first_name} ${user.last_name} <${user.email}>`,
-           subject:	"Invitation to Galvanize students social network",
-           attachment:
-           [
-              {data: `<html>i <i>hope</i> this works! here is an image: <img src='cid:my-image' width='100' height ='50'>
-              <div> Here is link for continue registration: <a>https://students-network.herokuapp.com/newuser/${user.reg_url}</a></div></html>`}
-           ]
+           subject:	"Invitation to Galvanize students social network"
         };
 
         // send the message and get a callback with an error or details of the message that was sent
