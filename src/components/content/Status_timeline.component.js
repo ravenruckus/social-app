@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+ import React, { Component } from 'react'
 import axios from 'axios'
 import AddStatusComments from './Add_status_comments.component'
 import EditComment from './Edit_comment.component'
@@ -17,15 +17,18 @@ export default class StatusTimeline extends Component {
       statusId: this.props.status.id,
       comment: '',
       display: 'none',
-      displayEdit: 'none'
+      displayEdit: 'none',
+      editedComment: ''
 
     }
     this.getComments = this.getComments.bind(this)
-    // this.updateComments = this.updateComments.bind(this)
+    this.updateComments = this.updateComments.bind(this)
     this.editTimelineState = this.editTimelineState.bind(this)
     this.editComment = this.editComment.bind(this)
     this.viewAddComment = this.viewAddComment.bind(this)
     this.viewEditComment = this.viewEditComment.bind(this)
+    this.updateEditedComment = this.updateEditedComment.bind(this)
+    this.updateDeletedComment = this.updateDeletedComment.bind(this)
 
   }
 
@@ -44,31 +47,17 @@ export default class StatusTimeline extends Component {
     this.getComments(this.state.statusId)
   }
 
-  // updateComments(comment) {
-  //
-  //
-  //     this.setState({
-  //       comments: [...this.state.comments, newComment]
-  //
-  //     })
-  // }
+
   editTimelineState(newState) {
     this.setState(newState)
   }
 
   editComment(currentUser, ele) {
-    // if(currentUser === ele.userId) {
-    //   return <EditComment comment={ele} currentUser={currentUser} />
-    //
-    // }
-
-
 
     if(currentUser === ele.userId) {
-      return    <span onClick={this.viewEditComment} style={{marginLeft: '1%'}} onClick={this.viewEditComment}> <Glyphicon glyph="pencil" /></span>
+      return    <span onClick={this.viewEditComment} style={{marginLeft: '1%'}}> <Glyphicon glyph="pencil" /></span>
 
     }
-
 
   }
 
@@ -94,6 +83,33 @@ export default class StatusTimeline extends Component {
 
     }
   }
+
+  updateComments(comment) {
+    const newComments = [...this.state.comments, comment]
+    this.setState({comments: newComments})
+
+  }
+
+  updateEditedComment(editedComment) {
+    const newComments = this.state.comments
+
+      for(const e of newComments) {
+        if(e.id === editedComment.id) {
+          e.statusComment = editedComment.statusComment
+        }
+      }
+     this.setState({comments: newComments})
+    }
+
+    updateDeletedComment(commentId) {
+      let newComments = this.state.comments
+
+      newComments = newComments.filter(function(el) {return el.id !== commentId })
+
+      this.setState({comments: newComments})
+
+
+      }
 
 
 
@@ -123,11 +139,11 @@ export default class StatusTimeline extends Component {
 
         {/* <div style={{background: 'rgba(000, 000, 000, .2)', padding: '5%'}}> */}
         <div className="status-comment-area">
-          { this.state.comments.map(ele => (
-            <div>
+          { this.state.comments.map((ele) => (
+            <div key={ele.id}>
             <p>User {ele.userId}: {ele.statusComment} {this.editComment(currentUser, ele)}</p>
             <div style={{display: this.state.displayEdit }}>
-            <EditComment comment={ele} currentUser={currentUser} />
+            <EditComment updateEditedComment={this.updateEditedComment} comment={ele} currentUser={currentUser} updateDeletedComment={this.updateDeletedComment}/>
 
           </div>
 
@@ -136,7 +152,7 @@ export default class StatusTimeline extends Component {
           ))}
 
           <div style={{display: this.state.display}}>
-            <AddStatusComments currentUser={currentUser} statusId={this.state.status.id}  />
+            <AddStatusComments updateComments={this.updateComments} currentUser={currentUser} statusId={this.state.status.id}  />
           </div>
 
 

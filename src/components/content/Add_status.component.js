@@ -7,15 +7,13 @@ import './home.css'
 
 
 export default class AddStatus extends Component {
-
-
   constructor(props) {
     super(props)
 
     this.state = {
-      currentUser: 2,
       newStatus: ''
     }
+
     this.handleChange = this.handleChange.bind(this)
     this.handlePostStatus = this.handlePostStatus.bind(this)
 
@@ -29,21 +27,24 @@ export default class AddStatus extends Component {
 
   handlePostStatus(event) {
     event.preventDefault()
-    const {currentUser, newStatus} = this.state
+    const { currentUser } = this.props;
+    const {newStatus} = this.state
     const request = {userId: currentUser, statusUpdate: newStatus}
     // const updateComment = {comments: [...this.props.comments, newComment]}
     // this.props.editTimelineState(updateComment)
 
     axios.post('/api/status', request)
       .then((row) => {
-
-        console.log(row);
+        console.log(row.data)
+        this.props.updateTimeline(row.data)
 
         this.setState({
           newStatus: '',
 
         })
+
       })
+
       .catch((err) => {
         console.log('Error text: ' + err.responseText + '  Error status: ' + err.status);
       })

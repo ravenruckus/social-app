@@ -37,6 +37,8 @@ export default class AddStatusComments extends Component {
       .then((row) => {
 
         console.log(row);
+        this.props.updateComments(row.data)
+
 
         this.setState({
           newComment: '',

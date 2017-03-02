@@ -14,8 +14,7 @@ export default class EditComment extends Component {
       statusId: this.props.comment.statusId,
       currentUser: this.props.currentUser,
       statusComment: this.props.comment.statusComment,
-      commentId: this.props.comment.id,
-      editedComment: ''
+      commentId: this.props.comment.id
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleEditComment = this.handleEditComment.bind(this)
@@ -40,9 +39,10 @@ export default class EditComment extends Component {
       .then((row) => {
 
         console.log(row);
+        this.props.updateEditedComment(row.data)
 
         this.setState({
-          newComment: '',
+          statusComment: '',
 
         })
       })
@@ -58,11 +58,15 @@ export default class EditComment extends Component {
 
     axios.delete(`/api/status/${statusId}/comments/${commentId}`)
       .then((row) => {
+
         console.log(row)
       })
       .catch((err) => {
         console.log('Error text: ' + err.responseText + '  Error status: ' + err.status);
       })
+
+      this.props.updateDeletedComment(commentId)
+
 
   }
 

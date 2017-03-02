@@ -14,6 +14,8 @@ export default class Timeline extends Component {
       this.state = {
         list: []
       }
+      this.updateTimeline = this.updateTimeline.bind(this)
+
 
     }
 
@@ -31,6 +33,10 @@ export default class Timeline extends Component {
       })
 
     }
+    updateTimeline(newListItem) {
+      const newList = [newListItem, ...this.state.list]
+      this.setState({list: newList})
+    }
 
 
   render(){
@@ -40,15 +46,15 @@ export default class Timeline extends Component {
     const styleModules = this.state.list.map(ele => {
        if (ele.description) {
         return (
-          <div className="timeline-components">
-          <ProjectTimeline project={ele}/>
-        </div>
+          <div key={ele.id + 'p'} className="timeline-components">
+            <ProjectTimeline project={ele}/>
+          </div>
 
         )
       }
       else {
         return (
-          <div className="timeline-components">
+          <div key={ele.id + 's'} className="timeline-components">
             {/* <h1> logged in: {currentUser}</h1> */}
 
 
@@ -64,7 +70,7 @@ export default class Timeline extends Component {
     return(
       <div>
         <h2>user: {currentUser}</h2>
-        <AddStatus currentUser={currentUser}/>
+        <AddStatus currentUser={currentUser} updateTimeline={this.updateTimeline}/>
 
            {styleModules}
 
