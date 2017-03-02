@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Row } from 'react-bootstrap'
 import ProjectsList from './ProjectsList.component'
 import LeftSideProjects from './LeftSideProjects.component'
+import DetailsProject from './DetailsProject.component'
 
 import axios from 'axios'
 
@@ -11,8 +12,11 @@ export default class Projects extends Component {
     this.state = {
       projects: [],
       userId: 0,
-      userName: ''
+      userName: '',
+      showDetails: false,
+      detailedProject: []
     }
+    this.handleState = this.handleState.bind(this)
   }
   componentDidMount(){
     axios.get('/api/projects')
@@ -27,12 +31,25 @@ export default class Projects extends Component {
         console.error(err);
       })
   }
+  handleState(newState){
+    this.setState(newState)
+  }
   render(){
     return(
-      <div>Hi from Projects
+      <div>
         <Row className="show-grid">
           <LeftSideProjects userId={this.state.userId}/>
-          <ProjectsList projects={this.state.projects} userName={this.state.userName}/>
+          { this.state.showDetails
+            ? <DetailsProject
+                detailedProject={this.state.detailedProject}
+                handleDetails={(newState) => this.handleState(newState)}
+              />
+            : <ProjectsList
+                projects={this.state.projects}
+                userName={this.state.userName}
+                handleDetails={(newState) => this.handleState(newState)}
+              />
+          }
         </Row>
       </div>
     )

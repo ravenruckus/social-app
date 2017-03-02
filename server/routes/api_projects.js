@@ -4,16 +4,34 @@ const boom = require('boom')
 const { camelizeKeys, decamelizeKeys } = require('humps')
 
 
-router.get('/', (_req, res) => {
+router.get('/', (_req, res, next) => {
   knex('projects')
-    .orderBy('updated_at', 'desc')
-    .then((rows) => {
-       const projects = camelizeKeys(rows)
+    .select(
+      'projects.id',
+      'users.id as user_id',
+      'users.last_name as user_last_name',
+      'users.first_name as user_first_name',
+      'projects.title',
+      'projects.description',
+      'projects.img_url',
+      'projects.web_url',
+      'projects.github_link',
+      'projects.github_readme',
+      'projects.likes',
+      'projects.created_at',
+      'projects.updated_at'
+    )
+    .orderBy('projects.updated_at', 'desc')
+    .innerJoin('users', 'projects.user_id', 'users.id')
+    .then((projects) => {
+      const responseData = camelizeKeys(projects)
 
-      res.send(projects);
+      res.send(responseData);
+
     })
     .catch((err) => {
-      next(err)
+      console.error(err);
+      return next(boom.create(500, 'from api projects get request'))
     })
 })
 
