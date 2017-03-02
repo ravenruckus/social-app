@@ -4,6 +4,17 @@ import { Row, Col, Thumbnail, Image, Button } from 'react-bootstrap'
 export default class ProjectsList extends Component {
   constructor(props) {
     super(props)
+    this.handleDetailsButton = this.handleDetailsButton.bind(this)
+  }
+  handleDetailsButton(el){
+    let detailedProject = []
+    detailedProject.push(el)
+
+    const newState = {
+      showDetails: true,
+      detailedProject: detailedProject
+    }
+    this.props.handleDetails(newState)
   }
   render(){
     return (
@@ -25,10 +36,10 @@ export default class ProjectsList extends Component {
                     <a href={el.webUrl}>Web Link</a><span> / </span>
                     <a href={el.githubLink}>GitHub Link</a>
                     <h4>Likes: {el.likes}</h4>
-                    <p>Created by: {el.userId}</p>
+                    <h6>Created by: {el.userFirstName + ' ' + el.userLastName}</h6>
                     <p>
-                      <Button bsStyle="primary">Details</Button>&nbsp;
-                      <Button bsStyle="default">Comment</Button>
+                      <Button bsStyle="primary" onClick={() => this.handleDetailsButton(el)}>Details</Button>&nbsp;
+                      <Button bsStyle="default">Comments</Button>
                     </p>
                   </Thumbnail>
                 </Col>
