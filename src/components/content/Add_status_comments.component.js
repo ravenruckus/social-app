@@ -30,8 +30,8 @@ export default class AddStatusComments extends Component {
     event.preventDefault()
     const {statusId, currentUser, newComment} = this.state
     const request = {userId: currentUser, statusComment: newComment}
-    const updateComment = {comments: [...this.props.comments, newComment]}
-    this.props.editTimelineState(updateComment)
+    // const updateComment = {comments: [...this.props.comments, newComment]}
+    // this.props.editTimelineState(updateComment)
 
     axios.post(`/api/status/${statusId}/comments`, request)
       .then((row) => {
@@ -54,11 +54,9 @@ export default class AddStatusComments extends Component {
 
     return (
       <div>
-        <h3>Hello from add comment component {this.state.currentUser}</h3>
-        <div style={{margin: '10% 20%'}} >
+        <div  >
          <Form>
               <FormGroup controlId="formBasicText" >
-                <ControlLabel>Add Comment</ControlLabel>
                 {' '}
                 <FormControl
                   type='text'

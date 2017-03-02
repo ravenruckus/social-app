@@ -60,7 +60,6 @@ export default class Timeline extends Component {
 
     return(
       <div>
-        <p>Hello from the timeline</p>
 
 
            {styleModules}

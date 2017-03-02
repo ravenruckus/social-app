@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Form, FormGroup, FormControl, ControlLabel, Button} from 'react-bootstrap'
+
+
 
 export default class EditComment extends Component {
 
@@ -8,16 +11,60 @@ export default class EditComment extends Component {
     super(props)
 
     this.state = {
-      list:[]
-
+      statusId: this.props.comment.statusId,
+      currentUser: this.props.currentUser,
+      statusComment: this.props.comment.statusComment,
+      commentId: this.props.comment.id,
+      editedComment: ''
     }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleEditComment = this.handleEditComment.bind(this)
+    this.handleDeleteComment = this.handleDeleteComment.bind(this)
+
+  }
 
 
-}
+  handleChange(e) {
+    this.setState({statusComment: e.target.value})
+  }
 
 
+  handleEditComment(event) {
+    event.preventDefault()
+    const {statusId, commentId} = this.state
+    const request = {statusComment: this.state.statusComment}
+    // const updateComment = {comments: [...this.props.comments, newComment]}
+    // this.props.editTimelineState(updateComment)
 
+    axios.patch(`/api/status/${statusId}/comments/${commentId}`, request)
+      .then((row) => {
 
+        console.log(row);
+
+        this.setState({
+          newComment: '',
+
+        })
+      })
+      .catch((err) => {
+        console.log('Error text: ' + err.responseText + '  Error status: ' + err.status);
+      })
+  }
+
+  handleDeleteComment(event) {
+    event.preventDefault()
+
+    const {statusId, commentId} = this.state
+
+    axios.delete(`/api/status/${statusId}/comments/${commentId}`)
+      .then((row) => {
+        console.log(row)
+      })
+      .catch((err) => {
+        console.log('Error text: ' + err.responseText + '  Error status: ' + err.status);
+      })
+
+  }
 
 
 
@@ -25,8 +72,29 @@ export default class EditComment extends Component {
 
     return (
       <div>
-        <h3>You made this comment!</h3>
+        <div style={{margin: '10% 20%'}} >
+         <Form>
+              <FormGroup controlId="formBasicText" >
+                <ControlLabel>Edit Comment</ControlLabel>
+                {' '}
+                <FormControl
+                  type='text'
+                  value={this.state.statusComment}
+                  placeholder={this.state.statusComment}
+                  onChange={this.handleChange}
+                />
+                </FormGroup>
+                {' '}
+                <Button type="submit" onClick={this.handleEditComment}>
+                Edit Comment
+                </Button>
 
+            </Form>
+
+            <Form>
+              <Button type="submit" onClick={this.handleDeleteComment}>Delete</Button>
+            </Form>
+          </div>
 
       </div>
     )
