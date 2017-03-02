@@ -3,7 +3,6 @@ import { browserHistory } from 'react-router'
 import { Grid } from 'react-bootstrap'
 import NavBar from './components/navbar/NavBar.component'
 import axios from 'axios'
-// import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -26,7 +25,6 @@ class App extends Component {
         .then((res) => {
           if (!res.data) {
             return console.log(res.data);
-            // return browserHistory.push('/')
           }
           this.setState(res.data)
         })
