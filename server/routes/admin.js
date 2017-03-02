@@ -62,7 +62,7 @@ router.post('/newusers', (req, res, next) => {
            attachment:
            [
               {data: `<html>i <i>hope</i> this works! here is an image: <img src='cid:my-image' width='100' height ='50'>
-              <div> Here is link for continue registration: <a>https://localhost:3000/newuser/${user.reg_url}</a></div></html>`}
+              <div> Here is link for continue registration: <a>https://students-network.herokuapp.com/newuser/${user.reg_url}</a></div></html>`}
            ]
         };
 
