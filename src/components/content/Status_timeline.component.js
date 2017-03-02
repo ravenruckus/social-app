@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import AddStatusComments from './Add_status_comments.component'
 import EditComment from './Edit_comment.component'
-import { Button, Glyphicon, Tooltip} from 'react-bootstrap'
+import { Button, Glyphicon} from 'react-bootstrap'
 
 
 export default class StatusTimeline extends Component {
@@ -106,7 +106,7 @@ export default class StatusTimeline extends Component {
       <div>
 
         <div style={{background: '#0045d8', color: '#fff', padding: '3%', borderRadius: '4px' }}>
-          {/* <p>User: {this.state.status.userId}</p> */}
+          <p>User: {this.state.status.userId}</p>
           <p>{this.state.status.statusUpdate}</p>
           <p>Likes: {this.state.status.likes}</p>
           <div>
@@ -123,7 +123,7 @@ export default class StatusTimeline extends Component {
         <div style={{background: 'rgba(000, 000, 000, .2)', padding: '5%'}}>
           { this.state.comments.map(ele => (
             <div>
-
+            <p>User: {ele.userId}</p>
             <p>{ele.statusComment} {this.editComment(currentUser, ele)}</p>
             <div style={{display: this.state.displayEdit }}>
             <EditComment comment={ele} currentUser={currentUser} />
@@ -134,7 +134,7 @@ export default class StatusTimeline extends Component {
           </div>
           ))}
 
-          <div id="postComment" style={{display: this.state.display}}>
+          <div style={{display: this.state.display}}>
             <AddStatusComments currentUser={currentUser} statusId={this.state.status.id}  />
           </div>
 

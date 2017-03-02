@@ -20,7 +20,11 @@ router.get('/timeline', (req, res) => {
           res.send(combined)
         })
     })
+    .catch((err) => {
+      next(err)
+    })
 })
+
 
 
 

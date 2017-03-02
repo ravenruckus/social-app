@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import ProjectTimeline from './Project_timeline.component'
 import StatusTimeline from './Status_timeline.component'
+import AddStatus from './Add_status.component'
+
 
 
 
@@ -10,7 +12,7 @@ export default class Timeline extends Component {
       super(props)
 
       this.state = {
-        list: [],
+        list: []
       }
 
     }
@@ -60,7 +62,8 @@ export default class Timeline extends Component {
 
     return(
       <div>
-
+        <h2>user: {currentUser}</h2>
+        <AddStatus currentUser={currentUser}/>
 
            {styleModules}
 

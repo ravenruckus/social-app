@@ -18,7 +18,7 @@ export default class Home extends Component {
        </Col>
 
        <Col md={3}>
-         <h2>Right Sidebar</h2>
+         {/* <h2>Right Sidebar</h2> */}
        </Col>
 
       </Row>
