@@ -40,15 +40,16 @@ export default class Timeline extends Component {
     const styleModules = this.state.list.map(ele => {
        if (ele.description) {
         return (
-
+          <div className="timeline-components">
           <ProjectTimeline project={ele}/>
+        </div>
 
         )
       }
       else {
         return (
-          <div>
-            <h1> logged in: {currentUser}</h1>
+          <div className="timeline-components">
+            {/* <h1> logged in: {currentUser}</h1> */}
 
 
             <StatusTimeline status={ele} currentUser={currentUser}/>

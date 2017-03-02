@@ -93,11 +93,11 @@ export default class AddStatus extends Component {
             />
           </li>
           <li>
-            <Button
-              style={{margin: '1% 1%'}}
+            <button
+              style={{margin: '1% 1%', bordeRadius: '8px'}}
               bsStyle="primary"
               onClick={this.handlePostStatus}
-            >SUBMIT STATUS</Button>
+            >Post</button>
           </li>
         </ul>
       </form>

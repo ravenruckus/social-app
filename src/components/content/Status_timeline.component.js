@@ -103,9 +103,10 @@ export default class StatusTimeline extends Component {
 
 
     return (
-      <div>
+      <div className="status-box">
 
-        <div style={{background: '#0045d8', color: '#fff', padding: '3%', borderRadius: '4px' }}>
+        {/* <div style={{background: '#0045d8', color: '#fff', padding: '3%', borderRadius: '4px' }}> */}
+        <div>
           <p>User: {this.state.status.userId}</p>
           <p>{this.state.status.statusUpdate}</p>
           <p>Likes: {this.state.status.likes}</p>
@@ -120,11 +121,11 @@ export default class StatusTimeline extends Component {
 
 
 
-        <div style={{background: 'rgba(000, 000, 000, .2)', padding: '5%'}}>
+        {/* <div style={{background: 'rgba(000, 000, 000, .2)', padding: '5%'}}> */}
+        <div className="status-comment-area">
           { this.state.comments.map(ele => (
             <div>
-            <p>User: {ele.userId}</p>
-            <p>{ele.statusComment} {this.editComment(currentUser, ele)}</p>
+            <p>User {ele.userId}: {ele.statusComment} {this.editComment(currentUser, ele)}</p>
             <div style={{display: this.state.displayEdit }}>
             <EditComment comment={ele} currentUser={currentUser} />
 
