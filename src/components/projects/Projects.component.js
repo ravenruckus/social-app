@@ -35,6 +35,7 @@ export default class Projects extends Component {
     this.setState(newState)
   }
   render(){
+    const currentUserId = this.props.userId
     return(
       <div>
         <Row className="show-grid">
@@ -43,10 +44,13 @@ export default class Projects extends Component {
             ? <DetailsProject
                 detailedProject={this.state.detailedProject}
                 handleDetails={(newState) => this.handleState(newState)}
+                userName={this.state.userName}
+                currentUserId={currentUserId}
               />
             : <ProjectsList
                 projects={this.state.projects}
                 userName={this.state.userName}
+                userId={currentUserId}
                 handleDetails={(newState) => this.handleState(newState)}
               />
           }

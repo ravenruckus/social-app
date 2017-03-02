@@ -33,8 +33,8 @@ export default class ProjectsList extends Component {
                     <Image src={el.imgUrl} style={{width: '190px', height: '140px'}} alt="ProjectImage" rounded />
                     {/* <Link to='details'> */}
                     <h4>{el.title}</h4><hr />
-                    <a href={el.webUrl}>Web Link</a><span> / </span>
-                    <a href={el.githubLink}>GitHub Link</a>
+                    <a href={el.webUrl} target="_blank">Web Link</a><span> / </span>
+                    <a href={el.githubLink} target="_blank">GitHub Link</a>
                     <h4>Likes: {el.likes}</h4>
                     <h6>Created by: {el.userFirstName + ' ' + el.userLastName}</h6>
                     <p>

@@ -23,7 +23,7 @@ export default class LeftSideProjects extends Component {
   render(){
     return (
       <Col md={3} sm={2}>
-        <a style={{margin: '14% 0'}} href="#" className="bigButton">PROJECTS</a> <br />
+        <a style={{margin: '14% 0'}} href="/projects" className="bigButton">PROJECTS</a> <br />
         <a href="#" className="postButton" onClick={this.handlePostProject}>POST NEW PROJECT</a>
         {this.state.showModal
           ? <PostProject showModal={this.handlePostProject}/>

@@ -21,7 +21,7 @@ router.get('/', (_req, res, next) => {
       'projects.created_at',
       'projects.updated_at'
     )
-    .orderBy('projects.updated_at', 'desc')
+    .orderBy('projects.updated_at', 'ASC')
     .innerJoin('users', 'projects.user_id', 'users.id')
     .then((projects) => {
       const responseData = camelizeKeys(projects)
@@ -169,23 +169,25 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/:id/likes', (req, res, next) => {
+  console.log(req.body.likes + '    ' + req.params.id);
   knex('projects')
-    .update('likes', knex.raw('likes + 1'))
-    .where({id: req.params.id})
-    .then( () => knex('projects').where({id: req.params.id}).first())
-    .then((project) => {
-      res.json({likes: project.likes})
+    .update('likes', req.body.likes)
+    .where('id', req.params.id)
+    .then( (data) => {
+      res.sendStatus(status)
     })
     .catch(err => next(err))
 })
 
-router.delete('/:id/likes', (req, res, next) => {
-  knex('projects')
-    .update('likes', knex.raw('likes - 1'))
-    .where({id: req.params.id})
-    .then(() => knex('projects').where({id: req.params.id}).first())
-    .then((project) => {
-      res.json({likes: project.likes})
+// <============ routes for comments ================>
+
+router.post('/:commentId/likes', (req, res, next) => {
+  console.log(req.body.likes + '    ' + req.params.commentId);
+  knex('projects_comments')
+    .update('likes', req.body.likes)
+    .where('id', req.params.commentId)
+    .then( (row) => {
+      res.send(row.data)
     })
     .catch(err => next(err))
 })
