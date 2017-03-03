@@ -46,8 +46,8 @@ export default class LeftSideProjects extends Component {
 
     </div>
         {/* <a style={{margin: '14% 0'}} href="/projects" className="bigButton">PROJECTS</a> <br /> */}
-        {/* <a href="#" className="postButton" onClick={this.handlePostProject}>POST NEW PROJECT</a> */}
-        <button className="addPostButton" onClick={this.handlePostProject}>Post New Project</button>
+        <a href="#" className="postButton" onClick={this.handlePostProject}>POST NEW PROJECT</a>
+        {/* <button className="addPostButton" onClick={this.handlePostProject}>Post New Project</button> */}
         {this.state.showModal
           ? <PostProject
             showModal={this.handlePostProject}

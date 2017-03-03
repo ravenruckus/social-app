@@ -6,14 +6,14 @@ exports.seed = function(knex) {
       return knex('status').insert([{
         id: 1,
         user_id: 1,
-        status_update: 'metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctus et',
+        status_update: 'Cats secretly make all the worlds muffins rub face on everything, kitty power! so cat slap dog in face.',
         likes: 3,
         link: 'https://soundcloud.com'
       },
       {
         id: 2,
         user_id: 1,
-        status_update: 'quam pharetra magna ac consequat metus sapien ut nunc vestibulum ante ipsum primis',
+        status_update: 'Meow stare out the window yet inspect anything.',
         likes: 2,
         link: ''
 
@@ -21,7 +21,7 @@ exports.seed = function(knex) {
       {
         id: 3,
         user_id: 1,
-        status_update: 'leo rhoncus sed vestibulum sit amet cursus id turpis integers',
+        status_update: "Step on your keyboard while you're gaming",
         likes: 0,
         link: ''
       },

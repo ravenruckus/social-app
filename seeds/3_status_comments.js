@@ -26,7 +26,7 @@ exports.seed = function(knex) {
     id: 3,
     status_id: 2,
     user_id: 1,
-    status_comment: 'web sites still in their infancy',
+    status_comment: 'Stretch have my breakfast spaghetti yarn.',
     likes: 3,
     created_at: new Date('2017-02-24 14:58:04 UTC'),
     updated_at: new Date('2017-02-24 14:58:04 UTC')
@@ -35,7 +35,7 @@ exports.seed = function(knex) {
     id: 4,
     status_id: 4,
     user_id: 1,
-    status_comment: 'Lorem Ipsum has been the industry',
+    status_comment: 'Fall over dead (not really but gets sypathy) meow to be let in. ',
     likes: 0,
     created_at: new Date('2017-02-24 17:43:04 UTC'),
     updated_at: new Date('2017-02-24 17:43:04 UTC')
