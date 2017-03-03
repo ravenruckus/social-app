@@ -2,6 +2,7 @@
 import axios from 'axios'
 import AddStatusComments from './Add_status_comments.component'
 import EditComment from './Edit_comment.component'
+import DeleteStatus from './DeleteStatus.component'
 import { Glyphicon} from 'react-bootstrap'
 import '../comments/CommentBox.css'
 
@@ -33,7 +34,6 @@ export default class StatusTimeline extends Component {
     this.viewEditComment = this.viewEditComment.bind(this)
     this.updateEditedComment = this.updateEditedComment.bind(this)
     this.updateDeletedComment = this.updateDeletedComment.bind(this)
-    this.handleLikeButton = this.handleLikeButton.bind(this)
     this.toggleEditing = this.toggleEditing.bind(this)
 
   }
@@ -85,15 +85,6 @@ export default class StatusTimeline extends Component {
 
     this.setState({displayEdit: ele.id})
 
-    // this.setState({currentCommentId: ele.id })
-
-    // if(this.state.displayEdit === 'none') {
-    //   this.setState({displayEdit: 'inline-block', statusDisplay: 'none'})
-    // }
-    // else if(this.state.displayEdit === 'inline-block'){
-    //   this.setState({displayEdit: 'none', statusDisplay: 'inline-block'})
-    //
-    // }
   }
 
   toggleEditing() {
@@ -126,11 +117,12 @@ export default class StatusTimeline extends Component {
 
 
       }
-      handleLikeButton(event, el) {
 
+      updateStatus(newStatus) {
+        this.setState({statues: newStatus})
       }
 
-
+      
 
 
   render() {
@@ -146,8 +138,13 @@ export default class StatusTimeline extends Component {
       <div className="status-box">
 
         <div>
-          <p>User: {this.state.status.userId}</p>
-          <p style={{fontSize: '2rem'}}>{this.state.status.statusUpdate}</p>
+          <p style={{color: '#ff8602'}}>User: {this.state.status.userId}</p>
+
+          { this.state.displayEdit !== status.id ?
+          <p style={{fontSize: '2rem'}}>{this.state.status.statusUpdate}{this.editComment(currentUser, status)}</p>
+          :
+          <DeleteStatus  statusId={status.id}/>
+        }
 
         <div className="status-comment-area">
           { this.state.comments.map((ele) => (

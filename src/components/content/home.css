@@ -83,7 +83,13 @@
     border-radius: 4px;
     margin-left: 3px;
     margin-bottom: 10px;
+    background-color: #fff;
   }
+
+
+.glyphicon-pencil:before {
+  color: #ff8602;
+}
 
   .status-box {
     background: #fff;

@@ -69,7 +69,6 @@ export default class Timeline extends Component {
 
     return(
       <div>
-        <h2>user: {currentUser}</h2>
         <AddStatus currentUser={currentUser} updateTimeline={this.updateTimeline}/>
 
            {styleModules}
