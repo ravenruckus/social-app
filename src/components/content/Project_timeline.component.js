@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Image } from 'react-bootstrap'
 
 
 export default class ProjectTimeline extends Component {
@@ -8,11 +9,12 @@ export default class ProjectTimeline extends Component {
     return (
       <div>
         {/* <h2>Hello from project timeline</h2> */}
-          <div style={{background: '#333', color: '#fff', padding: '3%', borderRadius: '4px' }} >
-            <h3>{project.title}</h3>
-             <p>Project By {project.userId}</p>
+          <div className="timelineProjects" >
+            <h3 style={{color: '#ff8602', marginBottom: '15px'}}>{project.title}</h3>
+              <Image src={project.imgUrl} style={{width: '60%', marginLeft: '20%'}} responsive thumbnail/>
+            <p>Project By {project.userId}</p>
              <p>{project.description}</p>
-             <p>{project.likes}</p>
+             <p style={{fontSize: '2rem'}}>Likes: {project.likes}</p>
            </div>
       </div>
 

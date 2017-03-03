@@ -86,6 +86,56 @@
     background-color: #fff;
   }
 
+  .App-logo {
+    height: 80px;
+  }
+
+  .homeProjects h2 {
+    border-bottom: 1px solid #ff8602;
+    padding-bottom: 5px;
+    width: 90%;
+    margin-bottom: 25px;
+  }
+
+  .homeProjects ul {
+    list-style: none;
+  }
+
+  .homeProjects li {
+    font-size: 1.7rem;
+    margin-top: 7px;
+  }
+
+  .homeProjects a {
+    color: ##007DC4;
+  }
+
+  .homeProjects li::before {content: "\25E6"; color: #ff8602;
+  display: inline-block; width: 1em;
+  margin-left: -1em}
+
+  .home {
+    width: 96%;
+    margin-left: 2%;
+  }
+
+  .timelineProjects {
+    margin-top: 50px;
+    margin-bottom: 35px;
+    border-bottom: 1px groove rgba(000, 000, 000, .05);
+    padding-bottom: 3px;
+  }
+
+
+  .homeProjects button {
+    border-radius: 4px;
+    background: #fff;
+    margin-left: 10%;
+    margin-bottom: 15px;
+    width: 50%;
+    border: 1px solid #ddd;
+    box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 1px;
+  }
 
 .glyphicon-pencil:before {
   color: #ff8602;
@@ -221,4 +271,6 @@
   .updateStatus {
     width: 98%;
     margin-left: .5%;
+    margin-top: 5px;
+    margin-bottom: 40px;
   }

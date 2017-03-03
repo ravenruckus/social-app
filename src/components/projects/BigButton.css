@@ -62,6 +62,7 @@
 	font-family:Georgia;
 	font-size:20px;
 	padding:31px 26px;
+	padding: none;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #ffffff;
 }
@@ -79,4 +80,14 @@
 .postButton:active {
 	position:relative;
 	top:1px;
+}
+
+.addPostButton {
+	border-radius: 4px;
+	background: #fff;
+	margin-left: 10%;
+	margin-bottom: 15px;
+	width: 50%;
+	border: 1px solid #ddd;
+	box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 1px;
 }
