@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Grid, Row, Col, Button, ButtonToolbar } from 'react-bootstrap'
 import Login from './users/Login.component'
+import logo from '../logo.svg'
 import './bgr.css'
 
 export default class Main extends Component {
@@ -16,6 +17,7 @@ export default class Main extends Component {
   }
   render(){
     const styleText = {textAlign: 'center', color: '#b84818', fontSize: '5rem', fontWeight: 'bold'}
+    const styleLogoWelcomePage = {marginLeft: '40%'}
     return(
       <div>
         {this.state.showModal
@@ -28,6 +30,9 @@ export default class Main extends Component {
               <Grid style={{marginTop: '12%'}}>
                 <Row>
                   <Col md={8} mdOffset={2}>
+                    <div style={styleLogoWelcomePage}>
+                      <img src={logo} className="App-logo" alt="logo" />
+                    </div>
                     <h1 style={styleText}>Welcome to</h1>
                     <h1 style={styleText}>Students Social Network </h1>
                     <p className="blockButtonsWelcome">
