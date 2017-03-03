@@ -28,15 +28,14 @@ export default class PostProject extends Component {
       webUrl: this.state.webUrl,
       githubReadme: this.state.githubReadme,
       description: this.state.description,
-      userId: this.props.userId,
+      userId: this.props.currentUserId,
       likes: 0
     }
     axios.post('/api/projects', request, { validateStatus: (status) => status < 500})
       .then((row) => {
         if (row.status < 400) {
           alert("Project successfully posted. Thank you!")
-          this.props.showModal
-          // browserHistory.push('/projects')
+          return location.reload(true)
         }
         else {
           alert("Message from server: "  + row.data)

@@ -18,7 +18,7 @@ export default class Projects extends Component {
     }
     this.handleState = this.handleState.bind(this)
   }
-  componentDidMount(){
+  componentWillMount(){
     axios.get('/api/projects')
       .then(res => {
         this.setState({
@@ -35,11 +35,12 @@ export default class Projects extends Component {
     this.setState(newState)
   }
   render(){
-    const currentUserId = this.props.userId
+    const currentUserId = this.state.userId
+    console.log(currentUserId);
     return(
       <div>
         <Row className="show-grid">
-          <LeftSideProjects userId={this.state.userId}/>
+          <LeftSideProjects userId={currentUserId}/>
           { this.state.showDetails
             ? <DetailsProject
                 detailedProject={this.state.detailedProject}
@@ -50,7 +51,7 @@ export default class Projects extends Component {
             : <ProjectsList
                 projects={this.state.projects}
                 userName={this.state.userName}
-                userId={currentUserId}
+                UserId={this.state.userId}
                 handleDetails={(newState) => this.handleState(newState)}
               />
           }

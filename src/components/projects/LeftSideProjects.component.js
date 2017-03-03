@@ -26,7 +26,11 @@ export default class LeftSideProjects extends Component {
         <a style={{margin: '14% 0'}} href="/projects" className="bigButton">PROJECTS</a> <br />
         <a href="#" className="postButton" onClick={this.handlePostProject}>POST NEW PROJECT</a>
         {this.state.showModal
-          ? <PostProject showModal={this.handlePostProject}/>
+          ? <PostProject
+            showModal={this.handlePostProject}
+            currentUserId={this.props.userId}
+            handleDetails={(newState) => this.handleState(newState)}
+          />
           : null
         }
       </Col>

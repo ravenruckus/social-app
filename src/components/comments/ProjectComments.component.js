@@ -82,7 +82,7 @@ export default class ProjectComments extends Component {
                 <div className="panel panel-white post panel-shadow" key={el.id}>
                   <div className="post-heading">
                     <div className="pull-left image">
-                      <img src="http://bootdey.com/img/Content/user_1.jpg" className="img-circle avatar" alt="user profile image" />
+                      <img src="http://bootdey.com/img/Content/user_1.jpg" className="img-circle avatar" alt="user" />
                     </div>
                     <div className="pull-left meta">
                       <div className="title h5">

@@ -36,7 +36,6 @@ router.get('/', (_req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-
   const { userId, title, description, imgUrl, webUrl, githubLink, githubReadme } = req.body;
 
   if(!title || !title.trim()) {
@@ -68,7 +67,8 @@ router.post('/', (req, res, next) => {
       res.send(project);
     })
     .catch((err) => {
-      next(err)
+      console.error(err);
+      next(boom.create(500, 'from api projects get request'))
     })
 })
 

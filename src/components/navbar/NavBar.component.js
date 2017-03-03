@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Button} from 'react-bootstrap'
+import { Nav, Navbar, NavItem } from 'react-bootstrap' //if need to use  NavDropdown, MenuItem, Button
 import { Link, browserHistory } from 'react-router'
 import axios from 'axios'
 import './NavBar.css'
