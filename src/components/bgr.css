@@ -1,41 +1,30 @@
-.homepage-hero-module {
-    border-right: none;
-    border-left: none;
-    position: relative;
+
+.videoWelcomePage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  opacity: .5;
 }
-.no-video .video-container video,
-.touch .video-container video {
-    display: none;
+.buttonsWelcomePage {
+    font-family: "museo-sans", "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
+    color: rgb(255, 255, 255);
+    background-color: rgba(35,160,186, .5);
+    border-color: rgba(255, 255, 255, 1);
+    transition: all 0.3s ease 0s;
+    animation: fadein 2s;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 10px;
+    border: 1px solid #096783;
+    margin: 2% 1.5%;
 }
-.no-video .video-container .poster,
-.touch .video-container .poster {
-    display: block !important;
-}
-.video-container {
-    position: relative;
-    bottom: 0%;
-    left: 0%;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    background: #000;
-}
-.video-container .poster img {
-    width: 100%;
-    bottom: 0;
-    position: absolute;
-}
-.video-container .filter {
-    z-index: 100;
-    position: absolute;
-    background: rgba(0, 0, 0, 0.4);
-    width: 100%;
-}
-.video-container video {
-    position: absolute;
-    z-index: 0;
-    bottom: 0;
-}
-.video-container video.fillWidth {
-    width: 100%;
+.blockButtonsWelcome {
+  text-align: center;
 }

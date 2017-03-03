@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { browserHistory } from 'react-router'
 import { Grid } from 'react-bootstrap'
 import NavBar from './components/navbar/NavBar.component'
+import Main from './components/Main.component'
 import axios from 'axios'
 
 class App extends Component {
@@ -20,7 +21,7 @@ class App extends Component {
       this.setState(newState)
     }
 
-    componentDidMount(){
+    componentWillMount(){
       axios.get('/api/tokens/token')
         .then((res) => {
           if (!res.data) {
@@ -34,17 +35,26 @@ class App extends Component {
     }
     render() {
       const { isLoggedIn, userId, userName } = this.state
+      console.log(isLoggedIn);
       return (
-        <main>
-          <NavBar isLoggedIn={this.state.isLoggedIn} userName={this.state.userName} />
-          <Grid>
-            { this.props.children
-              ? React.cloneElement(this.props.children, {isLoggedIn, userId, userName, editParentState: this.editParentState})
-              : null
-            }
-          </Grid>
-        </main>
-      );
+        <div>
+        {isLoggedIn
+          ? <main>
+              <NavBar isLoggedIn={this.state.isLoggedIn} userName={this.state.userName} />
+              <Grid>
+                { this.props.children
+                  ? React.cloneElement(this.props.children, {isLoggedIn, userId, userName, editParentState: this.editParentState})
+                  : null
+                }
+              </Grid>
+            </main>
+          : <div>
+              <NavBar isLoggedIn={this.state.isLoggedIn} userName={this.state.userName} />
+              <Main />
+            </div>
+        }
+        </div>
+      )
     }
   }
 

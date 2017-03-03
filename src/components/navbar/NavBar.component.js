@@ -1,8 +1,21 @@
 import React, { Component } from 'react'
 import { Nav, Navbar, NavItem } from 'react-bootstrap' //if need to use  NavDropdown, MenuItem, Button
 import { Link, browserHistory } from 'react-router'
+import Login from '../users/Login.component'
 import axios from 'axios'
 import './NavBar.css'
+
+function LogInNavLink(statement) {
+  console.log('From functional component' + statement);
+  return (
+    <div>
+      {statement
+        ? <Login />
+        : null
+      }
+    </div>
+  )
+}
 
 export default class NavBar extends Component {
   constructor(props) {
@@ -30,14 +43,14 @@ export default class NavBar extends Component {
       <Navbar className="navbar" collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to='/' onClick={() => location.reload(true)}><strong>Student Social Network</strong></Link>
+            <Link to='/' onClick={() => location.reload(true)}><strong>Students Social Network</strong></Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
             <NavItem onClick={() => this.handleNavLinks('/projects')}>Projects</NavItem>
-            <NavItem eventKey={2} href="/index">Home page</NavItem>
+            <NavItem href="/index">Home page</NavItem>
             {/* <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
               <MenuItem eventKey={3.1}>Action</MenuItem>
               <MenuItem eventKey={3.2}>Another action</MenuItem>
@@ -53,7 +66,7 @@ export default class NavBar extends Component {
                 <NavItem onClick={this.handleSignOut} href="login"><strong>LOG OUT</strong></NavItem>
               </Nav>
             : <Nav pullRight>
-                <NavItem onClick={() => this.handleNavLinks('/login')} href="/login"><strong>LOG IN</strong></NavItem>
+                <NavItem onClick={() => LogInNavLink(true)} href="#"><strong>LOG IN</strong></NavItem>
               </Nav>
             }
         </Navbar.Collapse>
