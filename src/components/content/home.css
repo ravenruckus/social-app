@@ -1,10 +1,7 @@
-.form-post-status{
-    /*max-width: 450px;*/
+/*.form-post-status{
     max-width: 100%;
     background: #FAFAFA;
     padding: 10px;
-    /*margin-left: 5%;*/
-    /*margin: 50px auto;*/
     box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     border: 1px groove rgba(000, 000, 000, .25);
@@ -16,7 +13,6 @@
 }
 .form-post-status ul li{
     display: block;
-    /*margin-bottom: 5px;*/
     min-height: 35px;
 }
 .form-post-status ul li  .field-style
@@ -77,6 +73,10 @@
   {
       background: linear-gradient(to bottom, #2D77A2 5%, #337DA8 100%);
       background-color: #28739E;
+  }*/
+
+  body {
+    background: rgba(119, 136, 153, .05);
   }
 
   .status-box {
@@ -89,7 +89,7 @@
   }
 
   .status-comment-area {
-    border-top:  1px groove rgba(000, 000, 000, .10);
+    /*border-top:  1px groove rgba(000, 000, 000, .10);*/
     margin-top: 10px;
     padding-top: 10px;
 
@@ -97,4 +97,116 @@
 
   .timeline-components {
     margin-top: 25px;
+  }
+  .status .panel {
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  .status .panel-shadow {
+      box-shadow: rgba(0, 0, 0, 0.2) 3px 3px 3px;
+  }
+  .status .panel-white {
+    border: 1px solid #dddddd;
+  }
+  .status .panel-white  .panel-heading {
+    color: #333;
+    background-color: #fff;
+    border-color: #ddd;
+  }
+  .status .panel-white  .panel-footer {
+    background-color: #fff;
+    border-color: #ddd;
+  }
+
+  .status .post .post-heading {
+    height: 95px;
+    padding: 20px 15px;
+  }
+  .status .post .post-heading .avatar {
+    width: 60px;
+    height: 60px;
+    display: block;
+    margin-right: 15px;
+  }
+  .status .post .post-heading .meta .title {
+    margin-bottom: 0;
+  }
+  .status .post .post-heading .meta .title a {
+    color: black;
+  }
+  .status .post .post-heading .meta .title a:hover {
+    color: #aaaaaa;
+  }
+  .status .post .post-heading .meta .time {
+    margin-top: 8px;
+    color: #999;
+  }
+  .status .post .post-image .image {
+    width: 100%;
+    height: auto;
+  }
+  .status .post .post-description {
+    padding: 15px;
+  }
+  .status .post .post-description p {
+    font-size: 14px;
+  }
+  .status .post .post-description .stats {
+    margin-top: 20px;
+  }
+  .status .post .post-description .stats .stat-item {
+    display: inline-block;
+    margin-right: 15px;
+  }
+  .status .post .post-description .stats .stat-item .icon {
+    margin-right: 8px;
+  }
+  .status .post .post-footer {
+    border-top: 1px solid #ddd;
+    padding: 15px;
+  }
+  .status .post .post-footer .input-group-addon a {
+    color: #454545;
+  }
+  .status .post .post-footer .comments-list {
+    padding: 0;
+    margin-top: 20px;
+    list-style-type: none;
+  }
+  .status .post .post-footer .comments-list .comment {
+    display: block;
+    width: 100%;
+    margin: 20px 0;
+  }
+  .status .post .post-footer .comments-list .comment .avatar {
+    width: 35px;
+    height: 35px;
+  }
+   .status .post .post-footer .comments-list .comment .comment-heading {
+    display: block;
+    width: 100%;
+  }
+   .status .post .post-footer .comments-list .comment .comment-heading .user {
+    font-size: 14px;
+    font-weight: bold;
+    display: inline;
+    margin-top: 0;
+    margin-right: 10px;
+  }
+ .status .post .post-footer .comments-list .comment .comment-heading .time {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 0;
+    display: inline;
+  }
+  .status .post .post-footer .comments-list .comment .comment-body {
+    margin-left: 50px;
+  }
+  .post .post-footer .comments-list .comment > .comments-list {
+    margin-left: 50px;
+  }
+
+  .updateStatus {
+    width: 98%;
+    margin-left: .5%;
   }

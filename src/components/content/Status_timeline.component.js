@@ -2,7 +2,9 @@
 import axios from 'axios'
 import AddStatusComments from './Add_status_comments.component'
 import EditComment from './Edit_comment.component'
-import { Button, Glyphicon} from 'react-bootstrap'
+import { Glyphicon} from 'react-bootstrap'
+import '../comments/CommentBox.css'
+
 
 
 export default class StatusTimeline extends Component {
@@ -17,7 +19,9 @@ export default class StatusTimeline extends Component {
       statusId: this.props.status.id,
       comment: '',
       display: 'none',
-      displayEdit: 'none',
+      displayEdit: null,
+      statusDisplay: 'inline-block',
+      currentCommentId: '',
       editedComment: ''
 
     }
@@ -29,6 +33,8 @@ export default class StatusTimeline extends Component {
     this.viewEditComment = this.viewEditComment.bind(this)
     this.updateEditedComment = this.updateEditedComment.bind(this)
     this.updateDeletedComment = this.updateDeletedComment.bind(this)
+    this.handleLikeButton = this.handleLikeButton.bind(this)
+    this.toggleEditing = this.toggleEditing.bind(this)
 
   }
 
@@ -36,7 +42,9 @@ export default class StatusTimeline extends Component {
 
   getComments(statusId) {
     axios.get(`api/status/${statusId}/comments`)
+
       .then(({ data }) => {
+
         this.setState({
           comments:data
         })
@@ -55,7 +63,7 @@ export default class StatusTimeline extends Component {
   editComment(currentUser, ele) {
 
     if(currentUser === ele.userId) {
-      return    <span onClick={this.viewEditComment} style={{marginLeft: '1%'}}> <Glyphicon glyph="pencil" /></span>
+      return    <span onClick={ (event) => this.viewEditComment(event, ele)} style={{marginLeft: '1%'}}> <Glyphicon glyph="pencil" /></span>
 
     }
 
@@ -65,7 +73,6 @@ export default class StatusTimeline extends Component {
     event.preventDefault()
     if(this.state.display === 'none') {
       this.setState({display: 'inline-block'})
-      //try to move cursor to below comments
     }
     else if(this.state.display === 'inline-block'){
       this.setState({display: 'none'})
@@ -73,15 +80,24 @@ export default class StatusTimeline extends Component {
     }
   }
 
-  viewEditComment(event){
+  viewEditComment(event, ele){
     event.preventDefault()
-    if(this.state.displayEdit === 'none') {
-      this.setState({displayEdit: 'inline-block'})
-    }
-    else if(this.state.displayEdit === 'inline-block'){
-      this.setState({displayEdit: 'none'})
 
-    }
+    this.setState({displayEdit: ele.id})
+
+    // this.setState({currentCommentId: ele.id })
+
+    // if(this.state.displayEdit === 'none') {
+    //   this.setState({displayEdit: 'inline-block', statusDisplay: 'none'})
+    // }
+    // else if(this.state.displayEdit === 'inline-block'){
+    //   this.setState({displayEdit: 'none', statusDisplay: 'inline-block'})
+    //
+    // }
+  }
+
+  toggleEditing() {
+    this.setState({displayEdit: null})
   }
 
   updateComments(comment) {
@@ -110,55 +126,70 @@ export default class StatusTimeline extends Component {
 
 
       }
+      handleLikeButton(event, el) {
+
+      }
 
 
 
 
   render() {
     const { currentUser } = this.props;
+    const { status } = this.props;
 
 
     return (
+
+      <div className="status">
+
+
+
+
+
+
       <div className="status-box">
 
-        {/* <div style={{background: '#0045d8', color: '#fff', padding: '3%', borderRadius: '4px' }}> */}
         <div>
           <p>User: {this.state.status.userId}</p>
           <p>{this.state.status.statusUpdate}</p>
-          <p>Likes: {this.state.status.likes}</p>
-          <div>
+          {/* <p>Likes: {this.state.status.likes}</p> */}
+          {/* <div>
             <Button> <Glyphicon glyph="thumbs-up" /> Like</Button>
             <Button onClick={this.viewAddComment}> <Glyphicon glyph="comment" /> Comment </Button>
-
-
-
           </div>
-        </div>
+        </div> */}
 
 
 
-        {/* <div style={{background: 'rgba(000, 000, 000, .2)', padding: '5%'}}> */}
+
         <div className="status-comment-area">
           { this.state.comments.map((ele) => (
             <div key={ele.id}>
-            <p>User {ele.userId}: {ele.statusComment} {this.editComment(currentUser, ele)}</p>
-            <div style={{display: this.state.displayEdit }}>
-            <EditComment updateEditedComment={this.updateEditedComment} comment={ele} currentUser={currentUser} updateDeletedComment={this.updateDeletedComment}/>
 
-          </div>
+              { this.state.displayEdit !== ele.id ?
 
+                <p style={{display: this.state.statusDisplay}}>User {ele.userId}: {ele.statusComment} {this.editComment(currentUser, ele)}</p>
+                :
+                <div>
+                  <EditComment updateEditedComment={this.updateEditedComment} comment={ele} currentUser={currentUser} updateDeletedComment={this.updateDeletedComment} toggleEditing={this.toggleEditing}/>
+                </div>
 
-          </div>
+              }
+
+            </div>
           ))}
 
-          <div style={{display: this.state.display}}>
+          {/* <div style={{display: this.state.display}}> */}
             <AddStatusComments updateComments={this.updateComments} currentUser={currentUser} statusId={this.state.status.id}  />
-          </div>
+          {/* </div> */}
 
 
 
        </div>
+
+     </div>
       </div>
+    </div>
     )
   }
 

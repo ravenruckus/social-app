@@ -30,8 +30,6 @@ export default class AddStatus extends Component {
     const { currentUser } = this.props;
     const {newStatus} = this.state
     const request = {userId: currentUser, statusUpdate: newStatus}
-    // const updateComment = {comments: [...this.props.comments, newComment]}
-    // this.props.editTimelineState(updateComment)
 
     axios.post('/api/status', request)
       .then((row) => {
@@ -55,53 +53,53 @@ export default class AddStatus extends Component {
   render() {
 
     return (
-      // <div>
-      //   <div  >
-      //    <Form>
-      //         <FormGroup controlId="formBasicText" >
-      //           {' '}
-      //           <FormControl
-      //             type='text'
-      //             value={this.state.newStatus}
-      //             placeholder='Enter text'
-      //             onChange={this.handleChange}
-      //           />
-      //           </FormGroup>
-      //           {' '}
-      //           <Button type="submit" onClick={this.handlePostStatus}>
-      //           Post Status
-      //           </Button>
+        <div className="updateStatus">
+        <div className="panel panel-white post panel-shadow">
+          <div className="post-footer">
+            <div className="input-group">
+              <input
+                name="commentText"
+                className="form-control"
+                placeholder="What is on your mind today?"
+                type="text"
+                value={this.state.newStatus}
+                onChange={this.handleChange} />
+              <span className="input-group-addon">
+                <a onClick={this.handlePostStatus} href="#"><i className="fa fa-edit"></i></a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+      // <form className="form-post-status">
+      //   <ul>
       //
-      //       </Form>
-      //     </div>
-      //
-      // </div>
-
-
-
-
-      <form className="form-post-status">
-        <ul>
-
-          <li>
-            <textarea
-              className="field-style"
-              name="status"
-              placeholder="Enter Status"
-              type="text"
-              value={this.state.newStatus}
-              onChange={this.handleChange}
-            />
-          </li>
-          <li>
-            <button
-              style={{margin: '1% 1%', bordeRadius: '8px'}}
-              bsStyle="primary"
-              onClick={this.handlePostStatus}
-            >Post</button>
-          </li>
-        </ul>
-      </form>
+      //     <li>
+      //       <textarea
+      //         className="field-style"
+      //         name="status"
+      //         placeholder="Enter Status"
+      //         type="text"
+      //         value={this.state.newStatus}
+      //         onChange={this.handleChange}
+      //       />
+      //     </li>
+      //     <li>
+      //       <button
+      //         style={{margin: '1% 1%', bordeRadius: '8px'}}
+      //         bsStyle="primary"
+      //         onClick={this.handlePostStatus}
+      //       >Post</button>
+      //     </li>
+      //   </ul>
+      // </form>
     )
   }
 

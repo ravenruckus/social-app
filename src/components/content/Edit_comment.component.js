@@ -32,19 +32,19 @@ export default class EditComment extends Component {
     event.preventDefault()
     const {statusId, commentId} = this.state
     const request = {statusComment: this.state.statusComment}
-    // const updateComment = {comments: [...this.props.comments, newComment]}
-    // this.props.editTimelineState(updateComment)
+
 
     axios.patch(`/api/status/${statusId}/comments/${commentId}`, request)
       .then((row) => {
 
         console.log(row);
         this.props.updateEditedComment(row.data)
+        this.props.toggleEditing()
 
-        this.setState({
-          statusComment: '',
-
-        })
+        // this.setState({
+        //   statusComment: '',
+        //
+        // })
       })
       .catch((err) => {
         console.log('Error text: ' + err.responseText + '  Error status: ' + err.status);
@@ -58,6 +58,7 @@ export default class EditComment extends Component {
 
     axios.delete(`/api/status/${statusId}/comments/${commentId}`)
       .then((row) => {
+        this.props.toggleEditing()
 
         console.log(row)
       })

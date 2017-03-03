@@ -8,20 +8,18 @@ export default class Home extends Component {
 
   render() {
     return (
+      <div className="homeBack">
       <Row>
        <Col md={3}>
          <TopicSidebar />
        </Col>
 
-       <Col md={6}>
+       <Col md={8}>
          <Timeline userId={this.props.userId} />
        </Col>
 
-       <Col md={3}>
-         {/* <h2>Right Sidebar</h2> */}
-       </Col>
-
       </Row>
+    </div>
     )
   }
 }

@@ -54,7 +54,7 @@ export default class Timeline extends Component {
       }
       else {
         return (
-          <div key={ele.id + 's'} className="timeline-components">
+          <div key={ele.id + 's'} className="timeline-components status">
             {/* <h1> logged in: {currentUser}</h1> */}
 
 

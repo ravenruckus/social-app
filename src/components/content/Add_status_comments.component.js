@@ -55,8 +55,38 @@ export default class AddStatusComments extends Component {
   render() {
 
     return (
-      <div>
-        <div  >
+
+      // <div className="container">
+      // <div className="col-sm-8">
+        <div className="panel panel-white post panel-shadow">
+          <div className="post-footer">
+            <div className="input-group">
+              <input
+                name="commentText"
+                className="form-control"
+                placeholder="Post comment"
+                type="text"
+                value={this.state.newComment}
+                onChange={this.handleChange} />
+              <span className="input-group-addon">
+                <a onClick={this.handlePostComment} href="#"><i className="fa fa-edit"></i></a>
+              </span>
+            </div>
+          </div>
+        </div>
+    //   </div>
+    // </div>
+
+
+
+
+
+
+
+
+
+    /*  <div>
+        <div>
          <Form>
               <FormGroup controlId="formBasicText" >
                 {' '}
@@ -75,7 +105,7 @@ export default class AddStatusComments extends Component {
             </Form>
           </div>
 
-      </div>
+      </div>*/
     )
   }
 
