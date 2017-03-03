@@ -79,6 +79,12 @@
     background: rgba(119, 136, 153, .05);
   }
 
+  .editButton {
+    border-radius: 4px;
+    margin-left: 3px;
+    margin-bottom: 10px;
+  }
+
   .status-box {
     background: #fff;
     border: 1px groove rgba(000, 000, 000, .25);
@@ -89,9 +95,9 @@
   }
 
   .status-comment-area {
-    /*border-top:  1px groove rgba(000, 000, 000, .10);*/
-    margin-top: 10px;
-    padding-top: 10px;
+    border-top:  1px groove rgba(000, 000, 000, .10);
+    margin-top: 25px;
+    padding-top: 15px;
 
   }
 

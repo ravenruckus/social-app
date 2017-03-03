@@ -76,8 +76,7 @@ export default class EditComment extends Component {
   render() {
 
     return (
-      <div>
-        <div style={{margin: '10% 20%'}} >
+      <div style={{marginBottom: '25px'}}>
          <Form>
               <FormGroup controlId="formBasicText" >
                 <ControlLabel>Edit Comment</ControlLabel>
@@ -90,18 +89,18 @@ export default class EditComment extends Component {
                 />
                 </FormGroup>
                 {' '}
-                <Button type="submit" onClick={this.handleEditComment}>
-                Edit Comment
-                </Button>
+                <button className="editButton" type="submit" onClick={this.handleEditComment}>
+                Edit
+              </button>
+              <button className="editButton" type="submit" onClick={this.handleDeleteComment}>Delete</button>
 
             </Form>
 
-            <Form>
-              <Button type="submit" onClick={this.handleDeleteComment}>Delete</Button>
-            </Form>
+            {/* <Form>
+              <button type="submit" onClick={this.handleDeleteComment}>Delete</button>
+            </Form> */}
           </div>
 
-      </div>
     )
   }
 

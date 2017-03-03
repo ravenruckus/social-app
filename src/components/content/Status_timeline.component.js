@@ -143,24 +143,11 @@ export default class StatusTimeline extends Component {
       <div className="status">
 
 
-
-
-
-
       <div className="status-box">
 
         <div>
           <p>User: {this.state.status.userId}</p>
-          <p>{this.state.status.statusUpdate}</p>
-          {/* <p>Likes: {this.state.status.likes}</p> */}
-          {/* <div>
-            <Button> <Glyphicon glyph="thumbs-up" /> Like</Button>
-            <Button onClick={this.viewAddComment}> <Glyphicon glyph="comment" /> Comment </Button>
-          </div>
-        </div> */}
-
-
-
+          <p style={{fontSize: '2rem'}}>{this.state.status.statusUpdate}</p>
 
         <div className="status-comment-area">
           { this.state.comments.map((ele) => (
@@ -179,9 +166,7 @@ export default class StatusTimeline extends Component {
             </div>
           ))}
 
-          {/* <div style={{display: this.state.display}}> */}
             <AddStatusComments updateComments={this.updateComments} currentUser={currentUser} statusId={this.state.status.id}  />
-          {/* </div> */}
 
 
 
