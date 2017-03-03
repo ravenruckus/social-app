@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { Route, Router, browserHistory, IndexRoute } from 'react-router'
+import { Route, Router, browserHistory, IndexRoute, IndexRedirect } from 'react-router'
 import App from './App'
 import Login from './components/users/Login.component'
-import Main from './components/Main.component'
 import RegUser from './components/users/RegUser.component'
 import AdminCreateUsers from './components/users/AdminCreateUsers.component'
 import Home from './components/content/Home.component'
@@ -15,8 +14,8 @@ export default class Routes extends Component {
     return (
       <Router history={browserHistory} >
         <Route path='/' component={App}>
-          <IndexRoute component={Main} />
-          <Route path='/login' component={Login} />
+          <IndexRedirect to='/index' />
+          <Route path='login' component={Login} />
           <Route path='/index' component={Home} />
           <Route path='/newuser/:url' component={RegUser} />
           <Route path='/admin/newusers' component={AdminCreateUsers} />
