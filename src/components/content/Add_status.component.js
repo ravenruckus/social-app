@@ -3,9 +3,6 @@ import axios from 'axios'
 import { Form, FormGroup, FormControl, ControlLabel, Button} from 'react-bootstrap'
 import './home.css'
 
-
-
-
 export default class AddStatus extends Component {
   constructor(props) {
     super(props)
@@ -19,11 +16,9 @@ export default class AddStatus extends Component {
 
   }
 
-
   handleChange(e) {
     this.setState({newStatus: e.target.value})
   }
-
 
   handlePostStatus(event) {
     event.preventDefault()
@@ -49,7 +44,6 @@ export default class AddStatus extends Component {
   }
 
 
-
   render() {
 
     return (
@@ -71,35 +65,7 @@ export default class AddStatus extends Component {
           </div>
         </div>
       </div>
-
-
-
-
-
-
-
-      // <form className="form-post-status">
-      //   <ul>
-      //
-      //     <li>
-      //       <textarea
-      //         className="field-style"
-      //         name="status"
-      //         placeholder="Enter Status"
-      //         type="text"
-      //         value={this.state.newStatus}
-      //         onChange={this.handleChange}
-      //       />
-      //     </li>
-      //     <li>
-      //       <button
-      //         style={{margin: '1% 1%', bordeRadius: '8px'}}
-      //         bsStyle="primary"
-      //         onClick={this.handlePostStatus}
-      //       >Post</button>
-      //     </li>
-      //   </ul>
-      // </form>
+      
     )
   }
 

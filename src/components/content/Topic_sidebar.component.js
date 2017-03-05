@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import logo from '../../logo.svg'
 import axios from 'axios'
-import './home.css';
+import './home.css'
+import { Link, browserHistory } from 'react-router'
+
 
 
 
@@ -16,7 +18,7 @@ export default class TopicSidebar extends Component {
       list: []
     }
     this.fetchProjects = this.fetchProjects.bind(this)
-
+    this.handleNavLinks = this.handleNavLinks.bind(this)
   }
 
 
@@ -38,6 +40,10 @@ export default class TopicSidebar extends Component {
       this.fetchProjects();
     }
 
+    handleNavLinks(link){
+      browserHistory.push(link)
+    }
+
 
 
   render() {
@@ -51,17 +57,28 @@ export default class TopicSidebar extends Component {
 
       <div  className="homeProjects">
 
-        <h2 >Projects</h2>
-        <button>Projects</button>
+        <h2 >Links</h2>
 
-        {
+        <button onClick={() => this.handleNavLinks('/projects')}>Projects</button>
+        <ul>
+          <li><a href="https://news.ycombinator.com/">Hacker News</a></li>
+          <li><a href="https://github.com/">GitHub</a></li>
+          <li><a href="https://github.com/open-source-society/computer-science">Self Taught Computer Science</a></li>
+          <li><a href="https://electron.atom.io/">Electron</a></li>
+          <li><a href="https://react.rocks/">React Projects</a></li>
+
+
+
+        </ul>
+
+        {/* {
           this.state.list.map(el=> (
             <ul key={el.id}>
               <li><a href="#">{el.title}</a></li>
             </ul>
           )
         )
-        }
+        } */}
       </div>
 
 

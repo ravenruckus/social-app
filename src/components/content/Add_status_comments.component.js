@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Form, FormGroup, FormControl, ControlLabel, Button} from 'react-bootstrap'
 
-
-
 export default class AddStatusComments extends Component {
 
 
@@ -18,27 +16,22 @@ export default class AddStatusComments extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handlePostComment = this.handlePostComment.bind(this)
 
-  }
-
+   }
 
   handleChange(e) {
     this.setState({newComment: e.target.value})
   }
 
-
   handlePostComment(event) {
     event.preventDefault()
     const {statusId, currentUser, newComment} = this.state
     const request = {userId: currentUser, statusComment: newComment}
-    // const updateComment = {comments: [...this.props.comments, newComment]}
-    // this.props.editTimelineState(updateComment)
 
     axios.post(`/api/status/${statusId}/comments`, request)
       .then((row) => {
 
         console.log(row);
         this.props.updateComments(row.data)
-
 
         this.setState({
           newComment: '',
@@ -50,14 +43,10 @@ export default class AddStatusComments extends Component {
       })
   }
 
-
-
   render() {
 
     return (
 
-      // <div className="container">
-      // <div className="col-sm-8">
         <div className="panel panel-white post panel-shadow">
           <div className="post-footer">
             <div className="input-group">
@@ -74,38 +63,7 @@ export default class AddStatusComments extends Component {
             </div>
           </div>
         </div>
-    //   </div>
-    // </div>
-
-
-
-
-
-
-
-
-
-    /*  <div>
-        <div>
-         <Form>
-              <FormGroup controlId="formBasicText" >
-                {' '}
-                <FormControl
-                  type='text'
-                  value={this.state.newComment}
-                  placeholder='Enter text'
-                  onChange={this.handleChange}
-                />
-                </FormGroup>
-                {' '}
-                <Button type="submit" onClick={this.handlePostComment}>
-                Post Comment
-                </Button>
-
-            </Form>
-          </div>
-
-      </div>*/
+    
     )
   }
 

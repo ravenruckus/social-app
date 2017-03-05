@@ -4,9 +4,6 @@ import ProjectTimeline from './Project_timeline.component'
 import StatusTimeline from './Status_timeline.component'
 import AddStatus from './Add_status.component'
 
-
-
-
 export default class Timeline extends Component {
     constructor(props) {
       super(props)
@@ -15,8 +12,6 @@ export default class Timeline extends Component {
         list: []
       }
       this.updateTimeline = this.updateTimeline.bind(this)
-
-
     }
 
     componentDidMount() {
@@ -29,21 +24,19 @@ export default class Timeline extends Component {
         this.setState({
           list:data
         })
-
       })
-
     }
+    
     updateTimeline(newListItem) {
       const newList = [newListItem, ...this.state.list]
       this.setState({list: newList})
     }
 
-
   render(){
     const { userId } = this.props;
     const currentUser = userId;
 
-    const styleModules = this.state.list.map(ele => {
+     const styleModules = this.state.list.map(ele => {
        if (ele.description) {
         return (
           <div key={ele.id + 'p'} className="timeline-components">
@@ -55,26 +48,16 @@ export default class Timeline extends Component {
       else {
         return (
           <div key={ele.id + 's'} className="timeline-components status">
-            {/* <h1> logged in: {currentUser}</h1> */}
-
-
             <StatusTimeline status={ele} currentUser={currentUser}/>
-
           </div>
-
         )
       }
     })
 
-
     return(
       <div>
         <AddStatus currentUser={currentUser} updateTimeline={this.updateTimeline}/>
-
            {styleModules}
-
-
-
       </div>
     )
   }

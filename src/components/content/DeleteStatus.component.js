@@ -23,8 +23,6 @@ export default class DeleteStatus extends Component {
     this.setState({statusComment: e.target.value})
   }
 
-
-
   handleDeleteStatus(event) {
     event.preventDefault()
 
@@ -40,12 +38,8 @@ export default class DeleteStatus extends Component {
       .catch((err) => {
         console.log('Error text: ' + err.responseText + '  Error status: ' + err.status);
       })
-
       // this.props.updateDeletedStatus(statusId)
-
   }
-
-
 
   render() {
 

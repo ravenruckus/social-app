@@ -19,20 +19,16 @@ export default class EditComment extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleEditComment = this.handleEditComment.bind(this)
     this.handleDeleteComment = this.handleDeleteComment.bind(this)
-
   }
-
 
   handleChange(e) {
     this.setState({statusComment: e.target.value})
   }
 
-
   handleEditComment(event) {
     event.preventDefault()
     const {statusId, commentId} = this.state
     const request = {statusComment: this.state.statusComment}
-
 
     axios.patch(`/api/status/${statusId}/comments/${commentId}`, request)
       .then((row) => {
@@ -40,11 +36,6 @@ export default class EditComment extends Component {
         console.log(row);
         this.props.updateEditedComment(row.data)
         this.props.toggleEditing()
-
-        // this.setState({
-        //   statusComment: '',
-        //
-        // })
       })
       .catch((err) => {
         console.log('Error text: ' + err.responseText + '  Error status: ' + err.status);
@@ -68,10 +59,7 @@ export default class EditComment extends Component {
 
       this.props.updateDeletedComment(commentId)
 
-
   }
-
-
 
   render() {
 
@@ -96,11 +84,7 @@ export default class EditComment extends Component {
 
             </Form>
 
-            {/* <Form>
-              <button type="submit" onClick={this.handleDeleteComment}>Delete</button>
-            </Form> */}
           </div>
-
     )
   }
 
