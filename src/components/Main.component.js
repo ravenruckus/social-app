@@ -35,18 +35,18 @@ export default class Main extends Component {
                     </div>
                     <h1 style={styleText}>Welcome to</h1>
                     <h1 style={styleText}>Students Social Network </h1>
-                    <p className="blockButtonsWelcome">
+                    <div className="blockButtonsWelcome">
                       <ButtonToolbar>
                         <Button className="buttonsWelcomePage" bsStyle="primary" bsSize="large" inline onClick={this.handleLogin}>Log In to SSN <i className="fa fa-sign-in" aria-hidden="true"></i></Button>
                         <Button className="buttonsWelcomePage" bsSize="large" inline>Send request for registration</Button>
                         <Button href="http://www.galvanize.com/" target="_blank" className="buttonsWelcomePage" bsSize="large" inline>More about Galvanize school</Button>
                       </ButtonToolbar>
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                       <h4 style={{fontStyle: 'italic', textAlign: 'center'}}>Galvanize Students Social Network is where you can have connections between</h4>
                       <h4 style={{fontStyle: 'italic', textAlign: 'center'}}>current students and alumni WebDev and Data Scientist.</h4><br />
                       <h4 style={{fontStyle: 'italic', textAlign: 'center'}}>Share projects, online resources, books, thoughts, projects idea, comments and much more...</h4>
-                    </p>
+                    </div>
                   </Col>
                 </Row>
               </Grid>

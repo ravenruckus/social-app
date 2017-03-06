@@ -35,7 +35,6 @@ class App extends Component {
     }
     render() {
       const { isLoggedIn, userId, userName } = this.state
-      console.log(isLoggedIn);
       return (
         <div>
         {isLoggedIn
