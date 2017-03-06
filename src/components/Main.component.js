@@ -8,19 +8,19 @@ export default class Main extends Component {
   constructor(props){
     super(props)
     this.state = {
-      showModal: false
+      showLogin: false
     }
-    this.handleModal = this.handleModal.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
   }
-  handleModal() {
-    this.setState({showModal: true})
+  handleLogin() {
+    this.setState({showLogin: true})
   }
   render(){
     const styleText = {textAlign: 'center', color: '#b84818', fontSize: '5rem', fontWeight: 'bold'}
     const styleLogoWelcomePage = {marginLeft: '40%'}
     return(
       <div>
-        {this.state.showModal
+        {this.state.showLogin
           ? <Login />
           : <div>
               <video className="videoWelcomePage" poster="./bground/bgr.jpg" autoPlay="true" loop>
@@ -37,7 +37,7 @@ export default class Main extends Component {
                     <h1 style={styleText}>Students Social Network </h1>
                     <p className="blockButtonsWelcome">
                       <ButtonToolbar>
-                        <Button className="buttonsWelcomePage" bsStyle="primary" bsSize="large" inline onClick={this.handleModal}>Log In to SSN <i className="fa fa-sign-in" aria-hidden="true"></i></Button>
+                        <Button className="buttonsWelcomePage" bsStyle="primary" bsSize="large" inline onClick={this.handleLogin}>Log In to SSN <i className="fa fa-sign-in" aria-hidden="true"></i></Button>
                         <Button className="buttonsWelcomePage" bsSize="large" inline>Send request for registration</Button>
                         <Button href="http://www.galvanize.com/" target="_blank" className="buttonsWelcomePage" bsSize="large" inline>More about Galvanize school</Button>
                       </ButtonToolbar>
