@@ -6,7 +6,7 @@ import RegUser from './components/users/RegUser.component'
 import AdminCreateUsers from './components/users/AdminCreateUsers.component'
 import Home from './components/content/Home.component'
 import Projects from './components/projects/Projects.component'
-// import RequestRegistration from './components/users/RequestRegistration.component'
+import RequestRegistration from './components/users/RequestRegistration.component'
 
 
 export default class Routes extends Component {
@@ -20,7 +20,7 @@ export default class Routes extends Component {
           <Route path='/newuser/:url' component={RegUser} />
           <Route path='/admin/newusers' component={AdminCreateUsers} />
           <Route path='/projects' component={Projects} />
-          {/* <Route path='/request' component={RequestRegistration} /> */}
+          <Route path='/request' component={RequestRegistration} />
         </Route>
       </Router>
     )
