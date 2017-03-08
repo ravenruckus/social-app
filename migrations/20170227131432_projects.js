@@ -10,9 +10,9 @@ exports.up = function(knex) {
           .inTable('users')
           .onDelete('CASCADE')
           .index();
-    table.string('title').notNullable().defaultTo('');
+    table.text('title').notNullable().defaultTo('');
     table.text('description').notNullable().defaultTo('');
-    table.string('img_url').notNullable().defaultTo('');
+    table.text('img_url').notNullable().defaultTo('');
     table.string('web_url').notNullable().defaultTo('');
     table.string('github_link').notNullable().defaultTo('');
     table.string('github_readme').notNullable().defaultTo('');
