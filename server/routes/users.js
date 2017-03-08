@@ -40,8 +40,6 @@ router.patch('/newuser', (req, res, next) => {
   if (!password || password.length < 8) {
     return next(boom.create(400, 'Password must be at least 8 characters'));
   }
-
-  // const Gclass = parseInt(req.body.Gclass, 10);
   knex('users')
     .where('email', email)
     .first()
@@ -53,13 +51,6 @@ router.patch('/newuser', (req, res, next) => {
           .where('id', id )
           .update({
             first_name, last_name, email, hashed_password, Gclass, grad_date, is_registred
-          // first_name: req.body.first_name,
-          // last_name: req.body.last_name,
-          // email: req.body.email,
-          // hashed_password: hashed_password,
-          // Gclass: Gclass,
-          // grad_date: req.body.grad_date,
-          // is_registred: req.body.is_registred
         }, '*');
       })
     .then((users) => {
@@ -75,7 +66,7 @@ router.patch('/newuser', (req, res, next) => {
       res.cookie('token', token, { // cookie is at the header
         httpOnly: true,
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7), // lives 7 days, if you don't include expires after you log out
-        secure: router.get('env') === 'production' // forces the token only be sent as https
+        secure: router.get('env') === 'production'
       });
 
       delete user.hashed_password
