@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Grid, Row, Col, Button, ButtonToolbar } from 'react-bootstrap'
 import Login from './users/Login.component'
+import RequestRegistration from './users/RequestRegistration.component'
 import logo from '../logo.svg'
 import './bgr.css'
 
@@ -8,12 +9,13 @@ export default class Main extends Component {
   constructor(props){
     super(props)
     this.state = {
-      showLogin: false
+      showLogin: false,
+      showRequest: false
     }
-    this.handleLogin = this.handleLogin.bind(this)
+    this.handleButtons = this.handleButtons.bind(this)
   }
-  handleLogin() {
-    this.setState({showLogin: true})
+  handleButtons(statement) {
+    this.setState(statement)
   }
   render(){
     const styleText = {textAlign: 'center', color: '#b84818', fontSize: '5rem', fontWeight: 'bold'}
@@ -23,6 +25,9 @@ export default class Main extends Component {
         {this.state.showLogin
           ? <Login />
           : <div>
+            {this.state.showRequest
+            ? <RequestRegistration />
+            : <div>
               <video className="videoWelcomePage" poster="./bground/bgr.jpg" autoPlay="true" loop>
                 <source src="./bground/bgr.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
                 <source src="./bground/bgr.webm" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
@@ -37,8 +42,8 @@ export default class Main extends Component {
                     <h1 style={styleText}>Students Social Network </h1>
                     <div className="blockButtonsWelcome">
                       <ButtonToolbar>
-                        <Button className="buttonsWelcomePage" bsStyle="primary" bsSize="large" inline onClick={this.handleLogin}>Log In to SSN <i className="fa fa-sign-in" aria-hidden="true"></i></Button>
-                        <Button className="buttonsWelcomePage" bsSize="large" inline>Send request for registration</Button>
+                        <Button className="buttonsWelcomePage" bsStyle="primary" bsSize="large" inline onClick={() => this.handleButtons({showLogin: true})}>Log In to SSN <i className="fa fa-sign-in" aria-hidden="true"></i></Button>
+                        <Button className="buttonsWelcomePage" bsSize="large" inline onClick={() => this.handleButtons({showRequest: true})}>Send request for registration</Button>
                         <Button href="http://www.galvanize.com/" target="_blank" className="buttonsWelcomePage" bsSize="large" inline>More about Galvanize school</Button>
                       </ButtonToolbar>
                     </div>
@@ -52,6 +57,8 @@ export default class Main extends Component {
               </Grid>
             </div>
           }
+          </div>
+        }
       </div>
     )
   }

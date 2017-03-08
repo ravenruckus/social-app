@@ -3,7 +3,6 @@ import { Col } from 'react-bootstrap'
 import PostProject from './PostProject.component'
 import './BigButton.css'
 import logo from '../../logo.svg'
-import axios from 'axios'
 
 
 export default class LeftSideProjects extends Component {
