@@ -7,8 +7,7 @@ exports.seed = function(knex) {
         id: 1,
         user_id: 1,
         title: 'An App for Yogis',
-        description: 'Put toy mouse in food bowl run out of litter box at full speed fall asleep on the washing machine
-        Cat ipsum dolor sit amet, sleep in the bathroom sink for scratch the box yet stick butt in face. Favor packaging over toy meow to be let out and thug cat but gnaw the corn cob, and and sometimes switches in french and say  just because well why not slap  face at 5am until human fills food dish dream about hunting birds. Lick yarn hanging out of own butt groom yourself 4 hours - checked, have your beauty sleep 18 hours - checked,',
+        description: 'Put toy mouse in food bowl run out of litter box at full speed fall asleep on the washing machine Cat ipsum dolor sit amet, sleep in the bathroom sink for scratch the box yet stick butt in face. Favor packaging over toy meow to be let out and thug cat but gnaw the corn cob, and and sometimes switches in french and say  just because well why not slap  face at 5am until human fills food dish dream about hunting birds. Lick yarn hanging out of own butt groom yourself 4 hours - checked, have your beauty sleep 18 hours - checked,',
         img_url: 'https://static.pexels.com/photos/317157/pexels-photo-317157.jpeg',
         web_url: 'https://www.seattle.gov/animal-shelter/adopt/applications',
         github_link: 'https://github.com/',
