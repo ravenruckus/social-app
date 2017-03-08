@@ -32,10 +32,16 @@ export default class RequestRegistration extends Component {
       grad_date: this.state.grad_date
     }
 
-    axios.patch('/api/users/reqnew', request)
-      .then((data) => {
-        console.log(data)
+    axios.post('/api/admin/reqnew', request, { validateStatus: (status) => status < 500})
+      .then((response) => {
+        if (response.status < 400) {
+        console.log(response)
         alert('Request was sent successfully. Check later your email for administrator approval and steps for continue registration')
+        location.reload(true)
+      }
+        else {
+          alert("Message from server: "  + response.data)
+        }
       })
       .catch((err) => {
         console.error(err);

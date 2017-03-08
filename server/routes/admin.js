@@ -100,19 +100,18 @@ router.post('/reqnew', (req, res, next) => {
   if (!first_name || !first_name.trim()) {
     return next(boom.create(400, 'First Name must not be blank'));
   }
-  if (!last_name || last_name.trim()) {
+  if (!last_name || !last_name.trim()) {
     return next(boom.create(400, 'Last Name must not be blank'));
   }
   if (!g_class || !g_class.trim()) {
     return next(boom.create(400, 'Gclass must not be blank'));
   }
-  if (!grad_date || grad_date.trim()) {
+  if (!grad_date || !grad_date.trim()) {
     return next(boom.create(400, 'Graduation date must not be blank'));
   }
   if (!email || !email.trim()) {
     return next(boom.create(400, 'Email must not be blank'));
   }
-
         //creating request for sending invitation
         const emailServer = emailSend.server.connect({
            user: `${process.env.E_S_L}`,
