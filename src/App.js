@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { browserHistory } from 'react-router'
+import React, { Component } from 'react'
 import { Grid } from 'react-bootstrap'
 import NavBar from './components/navbar/NavBar.component'
 import Main from './components/Main.component'
@@ -35,7 +34,6 @@ class App extends Component {
     }
     render() {
       const { isLoggedIn, userId, userName } = this.state
-      console.log(isLoggedIn);
       return (
         <div>
         {isLoggedIn

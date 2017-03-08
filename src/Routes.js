@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import { Route, Router, browserHistory, IndexRoute, IndexRedirect } from 'react-router'
+import { Route, Router, browserHistory, IndexRedirect } from 'react-router'
 import App from './App'
 import Login from './components/users/Login.component'
 import RegUser from './components/users/RegUser.component'
 import AdminCreateUsers from './components/users/AdminCreateUsers.component'
 import Home from './components/content/Home.component'
 import Projects from './components/projects/Projects.component'
-
 
 
 export default class Routes extends Component {

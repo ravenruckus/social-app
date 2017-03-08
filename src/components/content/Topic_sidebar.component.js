@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import logo from '../../logo.svg'
 import axios from 'axios'
 import './home.css'
-import { Link, browserHistory } from 'react-router'
+import { browserHistory } from 'react-router'
 
 
 
