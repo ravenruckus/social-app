@@ -10,6 +10,11 @@ The network is secure and private. A student must be invited or must send a requ
 
 After login the user is directed to the homepage where they can read statuses, comment on a status, create a status, view projects, give feedback on projects, or post a project.
 
+### FEATURES:
+
+<iframe src="https://player.vimeo.com/video/207682478" width="640" height="349" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<p><a href="https://vimeo.com/207682478">Student Social Network Project</a> from <a href="https://vimeo.com/user5537208">Alicia Gyori</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+
 ### TECHNOLOGIES:
 
 * React
