@@ -13,7 +13,7 @@ After login the user is directed to the homepage where they can read statuses, c
 ### FEATURES:
 
 <iframe src="https://player.vimeo.com/video/207682478" width="640" height="349" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-<p><a href="https://vimeo.com/207682478">Student Social Network Project</a> from <a href="https://vimeo.com/user5537208">Alicia Gyori</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+<p><a href="https://vimeo.com/207682478">Student Social Network</a> </p>
 
 ### TECHNOLOGIES:
 
