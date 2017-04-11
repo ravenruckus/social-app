@@ -28,7 +28,6 @@ export default class AddStatus extends Component {
 
     axios.post('/api/status', request)
       .then((row) => {
-        console.log(row.data)
         this.props.updateTimeline(row.data)
 
         this.setState({
@@ -65,7 +64,7 @@ export default class AddStatus extends Component {
           </div>
         </div>
       </div>
-      
+
     )
   }
 

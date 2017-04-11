@@ -40,7 +40,7 @@ export default class EditComment extends Component {
       .catch((err) => {
         console.log('Error text: ' + err.responseText + '  Error status: ' + err.status);
       })
-  }
+  } 
 
   handleDeleteComment(event) {
     event.preventDefault()
